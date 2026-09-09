@@ -104,14 +104,21 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="VERIFACTO" startnode="1" creator="Twine" creator-version="2.10.0" format="SugarCube" format-version="2.37.3" ifid="b0ff6e45-c762-42cb-a0ea-3b346efc2445" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">#ui-bar {
+	<tw-storydata name="VERIFACTO" startnode="1" creator="Twine" creator-version="2.10.0" format="SugarCube" format-version="2.37.3" ifid="b0ff6e45-c762-42cb-a0ea-3b346efc2445" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=Livvic:wght@300;400;600&display=swap');
+
+:root {
+    /* Fuente principal de la interfaz. Cambiar aqui para toda la UI. */
+    --font-main: 'Livvic', Helvetica, Arial, sans-serif;
+}
+
+#ui-bar {
 	display: none !important;
 }
 
 body, tw-story, tw-passage {
     background-color: #000910;
     color: #FFFFFF;
-    font-family: Arial, Futura, Impact, Helvetica, sans-serif;
+    font-family: var(--font-main);
     font-size: 115%;
     text-align: justify !important;
     max-width: 100%;
@@ -168,7 +175,7 @@ tw-listbox {
     color: DarkSlateBlue;
     border: 2px solid DarkSlateBlue;
     padding: 5px;
-    font-family: Arial, Futura, Impact, Helvetica, sans-serif;
+    font-family: var(--font-main);
     font-size: 115%;
 }
 
@@ -183,7 +190,7 @@ select {
     color: DarkSlateBlue !important;
     border: 2px solid DarkSlateBlue !important;
     padding: 5px !important;
-    font-family: Arial, Futura, Impact, Helvetica, sans-serif !important;
+    font-family: var(--font-main) !important;
     font-size: 115% !important;
 }
 
@@ -291,7 +298,7 @@ input[type="text"] {
 textbox{
   background-color: AliceBlue;
   color: DarkSlateBlue;
-  font-family: Arial, Futura, Impact, Helvetica, sans-serif;
+  font-family: var(--font-main);
 }
 
 input[type="text"]:hover {
@@ -482,7 +489,7 @@ button.macro-button:hover {
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
   z-index: 1000;
-  font-family: sans-serif;
+  font-family: var(--font-main);
 }
 
 /* Caja de texto */
