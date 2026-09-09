@@ -319,6 +319,28 @@ textarea:hover {
   min-height: 100vh;
 }
 
+.titulo-bloque {
+    width: fit-content;
+    min-width: 18em;
+    margin: 2em auto 0.5em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid currentColor;
+    text-align: center;
+}
+
+.titulo-bloque h1 {
+    margin: 0;
+    font-weight: 300;
+    line-height: 1.1;
+}
+
+.titulo-bloque .version {
+    margin: 0;
+    text-align: right;
+    font-size: 0.75em;
+    font-weight: 300;
+}
+
 
 button.macro-button {
     font-size: 1.4em;          /* Tamaño del texto más grande */
@@ -918,9 +940,7 @@ window.playConfettiOnce = function (passageName) {
 </script><tw-tag name="SinTestimonios" color=""></tw-tag><tw-tag name="fondoCiudad" color="red"></tw-tag><tw-tag name="MacetaSola" color="red"></tw-tag><tw-tag name="Brote" color="red"></tw-tag><tw-tag name="Planta1" color="orange"></tw-tag><tw-tag name="Planta2" color="yellow"></tw-tag><tw-tag name="Planta3" color="green"></tw-tag><tw-tag name="Planta4" color="blue"></tw-tag><tw-tag name="Victoria" color="red"></tw-tag><tw-tag name="Derrota" color="purple"></tw-tag><tw-tag name="Planta0" color="purple"></tw-tag><tw-passagedata pid="1" name="Inicio" tags="MacetaSola" position="900,75" size="100,100">&lt;&lt;set $NumTestimonios = 0&gt;&gt;
 &lt;&lt;set $confettiPlayed = {}&gt;&gt;
 
-&lt;h1 style=&quot;text-align: center;&quot;&gt;VERIFACTO&lt;/h1&gt;
-
-&lt;p style=&quot;text-align: center;&quot;&gt;Versión 1.0.0&lt;/p&gt;
+&lt;div class=&quot;titulo-bloque&quot;&gt;&lt;h1&gt;VERIFACTO&lt;/h1&gt;&lt;p class=&quot;version&quot;&gt;Versión 1.0.0&lt;/p&gt;&lt;/div&gt;
 
 &lt;h2 style=&quot;text-align: center;&quot;&gt;Reconstrucción de hechos&lt;/h2&gt;
 
