@@ -494,6 +494,52 @@ tw-passage > p:has(meter) {
   transform: rotate(90deg)
 }
 
+/* ---- Pie de pagina de la portada ---------------------------------------
+   Banda negra a todo el ancho: el pasaje esta limitado por
+   #passages{max-width:100ch} y #story{margin:2.5em}, asi que se compensa
+   con el truco de ancho completo (100vw + margenes negativos). */
+.pie {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    box-sizing: border-box;
+    background-color: #000910;
+    padding: 2.5em clamp(1.5em, 5vw, 5em);
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(1.5em, 6vw, 6em);
+}
+
+.pie-logos {
+    flex: none;
+    width: clamp(11rem, 22%, 24rem);
+    height: auto;
+    display: block;
+}
+
+.pie-texto {
+    flex: 1;
+    text-align: center;
+    font-size: 0.85em;
+    line-height: 1.6;
+}
+
+.pie-texto p {
+    margin: 0 0 1em;
+}
+
+.pie-texto p:last-child {
+    margin-bottom: 0;
+}
+
+@media (max-width: 700px) {
+    .pie {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5em;
+    }
+}
+
 #logo-enacif {
   display: block;
   margin: 0 auto;
@@ -885,15 +931,7 @@ window.playConfettiOnce = function (passageName) {
          
 &lt;div class=&quot;botonera&quot;&gt;&lt;div class=&quot;boton-img iniciar&quot;&gt;[[INICIAR|Identificación del usuario]]&lt;/div&gt;&lt;div class=&quot;boton-img informacion&quot;&gt;[[+INFORMACIÓN|Creditos]]&lt;/div&gt;&lt;/div&gt;
 
-&lt;p style=&quot;text-align: center;&quot;&gt;Este software no es apto para menores de edad y personas susceptibles a temas relacionados con la violencia y la muerte.&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;
-&lt;p style=&quot;text-align: center;&quot;&gt;D. R.©, 2025, UNAM - CC-BY-NC-SA.&lt;/p&gt;
-
-&lt;img
-  id=&quot;logo-enacif&quot;
-  src=&quot;https://www.enacif.unam.mx/wp-content/uploads/2025/01/LogosGral_obscuro.png&quot;
-  alt=&quot;ENACIF&quot;&gt;
-&lt;hr&gt;</tw-passagedata><tw-passagedata pid="2" name="CasoA1" tags="Planta1" position="550,675" size="100,100">&lt;&lt;set $NumTestimonios += 1&gt;&gt;
+&lt;div class=&quot;pie&quot;&gt;&lt;img class=&quot;pie-logos&quot; src=&quot;assets/lbl_legals.png&quot; alt=&quot;UNAM - Escuela Nacional de Ciencias Forenses&quot;&gt;&lt;div class=&quot;pie-texto&quot;&gt;&lt;p&gt;Este software no es apto para menores de edad y personas susceptibles a temas relacionados con la violencia y la muerte.&lt;/p&gt;&lt;p&gt;Contacto: vicentetorres@enacif.unam.mx&lt;/p&gt;&lt;p&gt;D. R.©, 2025, UNAM - CC-BY-NC-SA.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="2" name="CasoA1" tags="Planta1" position="550,675" size="100,100">&lt;&lt;set $NumTestimonios += 1&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoA1&quot;&gt;&gt;
 
 &lt;h1&gt;&lt;center&gt; PRIMER CASO &lt;/center&gt;&lt;/h1&gt;	
