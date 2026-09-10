@@ -573,46 +573,6 @@ tw-passage > p:has(meter) {
     transform: translateY(-1px);
 }
 
-/* =========================
-   INDICADOR DE SCROLL
-   ========================= */
-#scroll-indicator {
-    position: fixed;
-    right: 16px;
-    bottom: 14px;
-    z-index: 99998;
-    font-size: 5rem;
-    line-height: 1;
-    color: #8b0000;
-    text-shadow: 0 2px 8px rgba(139, 0, 0, 0.35);
-    pointer-events: none;
-    user-select: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease, visibility 0.25s ease;
-    animation: scroll-bounce 1.2s infinite ease-in-out;
-}
-
-#scroll-indicator.is-visible {
-    opacity: 0.75;
-    visibility: visible;
-}
-
-@keyframes scroll-bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
-}
-
-
-
-@media (max-width: 768px) {
-    #scroll-indicator {
-        right: 10px;
-        bottom: 10px;
-        font-size: 5rem;
-    }
-}
-
 .ellipsis {
     font-weight: 900;                  /* más grueso que bold */
     color: #8b0000;                   /* rojo oscuro consistente */
@@ -913,71 +873,6 @@ window.playConfettiOnce = function (passageName) {
   }
 };
 
-
-(function () {
-    const INDICATOR_ID = "scroll-indicator";
-    const THRESHOLD = 24; // margen para evitar parpadeo al llegar al final
-
-    function ensureIndicator() {
-        let el = document.getElementById(INDICATOR_ID);
-
-        if (!el) {
-            el = document.createElement("div");
-            el.id = INDICATOR_ID;
-            el.setAttribute("aria-hidden", "true");
-            el.textContent = "⬇";
-            document.body.appendChild(el);
-        }
-
-        return el;
-    }
-
-    function hasMoreToScroll() {
-        const doc = document.documentElement;
-        const body = document.body;
-
-        const scrollTop = window.scrollY || doc.scrollTop || body.scrollTop || 0;
-        const viewportHeight = window.innerHeight || doc.clientHeight || 0;
-        const scrollHeight = Math.max(
-            body.scrollHeight,
-            doc.scrollHeight,
-            body.offsetHeight,
-            doc.offsetHeight
-        );
-
-        return (scrollHeight - (scrollTop + viewportHeight)) > THRESHOLD;
-    }
-
-    function updateIndicator() {
-        const el = ensureIndicator();
-        const visible = hasMoreToScroll();
-        el.classList.toggle("is-visible", visible);
-    }
-
-    let rafId = null;
-    function scheduleUpdate() {
-        if (rafId !== null) {
-            cancelAnimationFrame(rafId);
-        }
-        rafId = requestAnimationFrame(updateIndicator);
-    }
-
-    $(document).on(":passagedisplay", scheduleUpdate);
-    $(window).on("resize scroll", scheduleUpdate);
-
-    $(document).ready(function () {
-        ensureIndicator();
-        scheduleUpdate();
-
-        const target = document.getElementById("passages") || document.body;
-        const observer = new MutationObserver(scheduleUpdate);
-        observer.observe(target, {
-            childList: true,
-            subtree: true,
-            characterData: true
-        });
-    });
-})();
 
 </script><tw-tag name="SinTestimonios" color=""></tw-tag><tw-tag name="fondoCiudad" color="red"></tw-tag><tw-tag name="MacetaSola" color="red"></tw-tag><tw-tag name="Brote" color="red"></tw-tag><tw-tag name="Planta1" color="orange"></tw-tag><tw-tag name="Planta2" color="yellow"></tw-tag><tw-tag name="Planta3" color="green"></tw-tag><tw-tag name="Planta4" color="blue"></tw-tag><tw-tag name="Victoria" color="red"></tw-tag><tw-tag name="Derrota" color="purple"></tw-tag><tw-tag name="Planta0" color="purple"></tw-tag><tw-passagedata pid="1" name="Inicio" tags="MacetaSola" position="900,75" size="100,100">&lt;&lt;set $NumTestimonios = 0&gt;&gt;
 &lt;&lt;set $confettiPlayed = {}&gt;&gt;
