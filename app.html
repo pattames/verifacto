@@ -109,6 +109,8 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 :root {
     /* Fuente principal de la interfaz. Cambiar aqui para toda la UI. */
     --font-main: 'Livvic', Helvetica, Arial, sans-serif;
+    /* Grosor del marco negro. Unico valor a tocar. */
+    --frame-width: 18px;
 }
 
 #ui-bar {
@@ -139,6 +141,16 @@ body::before {
     z-index: -1;
 }
 
+/* Marco negro. Se dibuja encima de todo, sin tocar la imagen. */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    border: var(--frame-width) solid #000000;
+    pointer-events: none;
+    z-index: 9999;
+}
+
 
 tw-passage {
     display: block !important;
@@ -151,7 +163,7 @@ tw-passage {
 
 #story {
   margin: 1%;
-   
+  padding: var(--frame-width);
 }
 
 #passages {
