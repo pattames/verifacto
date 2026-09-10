@@ -234,6 +234,52 @@ select option {
     padding: 10px;
 }
 
+/* ---- Botones de imagen -------------------------------------------------
+   El texto va incluido en el PNG, así que se oculta el del enlace pero se
+   conserva para lectores de pantalla. Cada botón necesita su clase y su
+   imagen; los botones que siguen usando .botón (pastilla CSS) no cambian. */
+.botonera {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.1em;
+    margin: 1em auto 7em;
+}
+
+.boton-img {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.boton-img:hover {
+    transform: scale(1.04);
+    cursor: pointer;
+}
+
+.boton-img a,
+.boton-img a:hover {
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    text-indent: -9999px;   /* oculta el texto sin quitarlo del DOM */
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: none;    /* anula el subrayado global de a:hover */
+}
+
+.boton-img.iniciar a {
+    width: min(200px, 70vw);
+    aspect-ratio: 303 / 64;
+    background-image: url('assets/iniciar_btn.png');
+}
+
+.boton-img.informacion a {
+    width: min(200px, 70vw);
+    aspect-ratio: 306 / 64;
+    background-image: url('assets/informacion_btn.png');
+}
+
 .boton {
   border-radius: 5px;
   background-color: green;
@@ -942,10 +988,7 @@ window.playConfettiOnce = function (passageName) {
 
 &lt;p style=&quot;text-align: center; margin: 0;&quot;&gt;a partir de fragmentos de testimonio&lt;/p&gt;
          
-&lt;table style=&quot;width: 50%; margin: 2em auto; border-collapse: collapse; text-align: center; display: flex; flex-direction: column; align-items: center;&quot;&gt;
-    &lt;td&gt;&lt;h2 style=&quot;margin: 0;&quot;&gt;&lt;div class=&quot;boton&quot; style=&quot;padding: 0 60px;&quot;&gt;[[INICIAR|Identificación del usuario]]&lt;/div&gt;&lt;/h2&gt;&lt;/td&gt;
-    &lt;td&gt;&lt;h2 style=&quot;margin: 0;&quot;&gt;&lt;div class=&quot;boton&quot; style=&quot;background-color: red;&quot;&gt;[[+INFORMACIÓN|Creditos]]&lt;/div&gt;&lt;/h2&gt;&lt;/td&gt;
-&lt;/table&gt;
+&lt;div class=&quot;botonera&quot;&gt;&lt;div class=&quot;boton-img iniciar&quot;&gt;[[INICIAR|Identificación del usuario]]&lt;/div&gt;&lt;div class=&quot;boton-img informacion&quot;&gt;[[+INFORMACIÓN|Creditos]]&lt;/div&gt;&lt;/div&gt;
 
 &lt;p style=&quot;text-align: center;&quot;&gt;Este software no es apto para menores de edad y personas susceptibles a temas relacionados con la violencia y la muerte.&lt;/p&gt;
 &lt;p&gt;&lt;/p&gt;
