@@ -729,6 +729,174 @@ tw-passage > p:has(meter) {
   height: auto;
 }
 
+/* ---- Pagina de informacion (pasaje Creditos) -------------------------------
+   Acordeón de una sola sección abierta a la vez. */
+.info-panel {
+    width: 100%;
+    max-width: 46rem;
+    margin: 1.6em auto 0;
+    border-radius: 1.05rem;
+    overflow: hidden;
+    background: linear-gradient(202deg, #2d5580 0%, #1b3563 34%, #08103a 70%, #000028 100%);
+    border: 1px solid rgba(150, 190, 235, 0.40);
+    box-shadow: 0 0.6rem 2rem rgba(0, 0, 0, 0.45);
+    padding-bottom: 2.2rem;
+    text-align: left;
+}
+
+/* Barra superior: solo contiene el boton Regresar. */
+.info-barra {
+    padding: 0.9rem 1.1rem 0.35rem;
+}
+
+.info-regresar a,
+.info-regresar a:hover {
+    display: block;
+    width: clamp(7.5rem, 24%, 10rem);
+    aspect-ratio: 214 / 54;
+    background: url('assets/btn_regresar.png') no-repeat center / contain;
+    text-indent: -9999px;          /* esconder texto (ya hay uno en el PNG) */
+    overflow: hidden;
+    white-space: nowrap;
+    border-bottom: none;
+    transition: transform 0.2s ease;
+}
+
+.info-regresar a:hover {
+    transform: scale(1.04);
+}
+
+/* ---- Cabecera de cada sección ---- */
+.info-seccion > summary {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.9rem;
+    padding: 0.55rem 1.15rem;
+    border-bottom: 3px solid #ffffff;
+    font-size: clamp(1.05rem, 3.2vw, 1.55rem);
+    font-weight: 400;
+    color: #ffffff;
+    cursor: pointer;
+    list-style: none;              /* quita el triangulito nativo */
+}
+
+.info-seccion > summary::-webkit-details-marker {
+    display: none;
+}
+
+.info-tri {
+    width: 1.7rem;
+    flex: none;
+    display: block;
+}
+
+/* Verde hacia abajo = cerrada; roja hacia arriba = abierta. */
+.info-seccion[open] .info-tri-cerrado,
+.info-seccion:not([open]) .info-tri-abierto {
+    display: none;
+}
+
+/* ---- Cuerpo blanco ---- */
+.info-cuerpo {
+    background: #ffffff;
+    color: #0E1C2D;
+    padding: 1.35rem 1.5rem;
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+.info-cuerpo p {
+    text-align: left;
+    margin: 0 0 0.85em;
+}
+
+.info-cuerpo p:last-child {
+    margin-bottom: 0;
+}
+
+.info-cuerpo strong {
+    font-weight: 700;
+}
+
+/* Secciones de un solo bloque (Compatibilidad, Aviso de privacidad): el
+   texto tiene más padding, como en las laminas 3 y 4. */
+.info-cuerpo.info-sangrado {
+    padding: 1.5rem 2.6rem;
+}
+
+/* ---- Filas con rotulo a la izquierda (solo "Sobre el programa") ---- */
+.info-fila {
+    display: grid;
+    grid-template-columns: minmax(5rem, 9rem) 1fr;
+    gap: 0 1.1rem;
+    margin-bottom: 1.1em;
+}
+
+.info-rotulo {
+    text-align: right;
+    line-height: 1.12;
+    padding-top: 0.1em;
+}
+
+/* El rotulo va en dos renglones fijos: el corte no puede quedar depender
+   del ancho de la columna ni del tamaño de la fuente. */
+.info-rotulo .linea {
+    display: block;
+}
+
+.info-rotulo .chico {
+    font-size: 0.95rem;
+    font-weight: 300;
+}
+
+.info-rotulo .grande {
+    font-size: 1.45rem;
+    font-weight: 400;
+}
+
+.info-centrado {
+    text-align: center;
+}
+
+.info-cuerpo p.info-centrado {
+    text-align: center;
+}
+
+/* ---- Equipo de desarrollo ---- */
+.info-credito {
+    text-align: center;
+    margin-bottom: 1.1em;
+}
+
+.info-credito .rol {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.info-credito .nombre {
+    display: block;
+    font-weight: 700;
+}
+
+@media (max-width: 620px) {
+    /* En pantalla estrecha el rotulo pasa arriba y deja de competir por el
+       ancho con el texto. */
+    .info-fila {
+        grid-template-columns: 1fr;
+        gap: 0.2rem;
+    }
+
+    .info-rotulo {
+        text-align: left;
+    }
+
+    .info-cuerpo.info-sangrado {
+        padding: 1.3rem 1.4rem;
+    }
+}
+
 /* =========================
    CAJA: INSTRUCCIONES
    ========================= */
@@ -1119,6 +1287,28 @@ $(document).one(":storyready", function () {
 
     document.body.appendChild(pie);
 });
+
+
+/* ---- Acordeón de la pagina de información ---------------------------------
+   Solo una sección abierta a la vez. El atributo name="info" de <details> ya
+   lo hace en los navegadores recientes; esto cubre a los que todavía no
+   lo soportan. */
+document.addEventListener("toggle", function (ev) {
+    var abierta = ev.target;
+
+    if (!abierta.classList || !abierta.classList.contains("info-seccion") || !abierta.open) {
+        return;
+    }
+
+    Array.prototype.forEach.call(
+        document.querySelectorAll("details.info-seccion"),
+        function (otra) {
+            if (otra !== abierta) {
+                otra.open = false;
+            }
+        }
+    );
+}, true);
 </script><tw-tag name="SinTestimonios" color=""></tw-tag><tw-tag name="fondoCiudad" color="red"></tw-tag><tw-tag name="MacetaSola" color="red"></tw-tag><tw-tag name="Brote" color="red"></tw-tag><tw-tag name="Planta1" color="orange"></tw-tag><tw-tag name="Planta2" color="yellow"></tw-tag><tw-tag name="Planta3" color="green"></tw-tag><tw-tag name="Planta4" color="blue"></tw-tag><tw-tag name="Victoria" color="red"></tw-tag><tw-tag name="Derrota" color="purple"></tw-tag><tw-tag name="Planta0" color="purple"></tw-tag><tw-passagedata pid="1" name="Inicio" tags="MacetaSola" position="900,75" size="100,100">&lt;&lt;set $NumTestimonios = 0&gt;&gt;
 &lt;&lt;set $confettiPlayed = {}&gt;&gt;
 
@@ -1403,93 +1593,55 @@ Te quedan: &#39;&#39;$TestimoniosRestantes&#39;&#39; posibles fragmentos por ver
 &lt;center&gt;[[⇒Regresemos a la portada del programa⇒|Inicio]]&lt;/center&gt;
 &lt;center&gt;[[⇒Regresemos a las instrucciones⇒ |Instruccion]]&lt;/center&gt;
 
-&lt;&lt;set $clics = 0&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="Creditos" tags="MacetaSola" position="775,325" size="100,100">&lt;h1&gt;&lt;center&gt; INFORMACIÓN DEL PROGRAMA VERIFACTO&lt;/center&gt;&lt;/h1&gt;
-
-&lt;&lt;set $mostrar to false&gt;&gt;
-&lt;&lt;button &quot;Sobre el programa +/-&quot;&gt;&gt;
-	&lt;&lt;set $mostrar to not $mostrar&gt;&gt;
-	&lt;&lt;replace &quot;#SobrePrograma&quot;&gt;&gt;
-		&lt;&lt;if $mostrar&gt;&gt;
-
-&lt;div class=&quot;instrucciones&quot;&gt;
-&lt;p style=&quot;text-align: justify;&quot;&gt;La ciencia forense consiste en la aplicación del conocimiento científico en apoyo al sistema de justicia. Sin embargo, la reconstrucción de hechos pasados suele realizarse a partir de datos incompletos, sesgados o incluso contaminados. El objetivo del programa es brindar un espacio interactivo que permita a los usuarios desarrollar la habilidad para reconstruir información a partir de datos fragmentados, imprecisos o sesgados, y aun así obtener información útil para la investigación. Algunos casos presentados serán más sencillos que otros, pero todos cuentan con al menos una solución posible.&lt;/p&gt; 
-&lt;p style=&quot;text-align: justify;&quot;&gt;El funcionamiento del programa se basa en cadenas de Markov. Una cadena de Markov es un modelo matemático que describe procesos en los que cada estado depende únicamente del estado anterior. Este tipo de modelado se utiliza en diversos campos, como la inteligencia artificial, la biología y la economía, para representar sistemas donde los eventos ocurren en secuencia. Las cadenas de Markov constituyen uno de los fundamentos en la programación de inteligencias generativas de texto. No obstante, este programa no es una inteligencia artificial, sino una simulación basada en principios similares, aplicada al contexto de los juegos de texto.&lt;/p&gt; 
-&lt;p style=&quot;text-align: justify;&quot;&gt;Cada caso del programa parte de una historia completa y detallada. A través de un algoritmo, esta historia se fragmenta y reorganiza, procurando mantener coherencia en el relato. Sin embargo, los fragmentos contienen menos información que el texto original, por lo que es tarea del usuario reconstruir los hechos a partir de las pistas disponibles y avanzar en el simulador. Desde una perspectiva técnica, estos pequeños testimonios son ejemplos de narrativas procedurales: relatos generados mediante ecuaciones matemáticas, sin intervención humana directa.&lt;/p&gt; 
-&lt;p style=&quot;text-align: justify;&quot;&gt;¿Cuántos fragmentos necesitas revisar para comprender los hechos de cada caso? Esa es la pregunta central que plantea este software.&lt;/p&gt; &lt;p style=&quot;text-align: justify;&quot;&gt;Todos los casos son completamente ficticios. Los nombres, lugares y eventos han sido creados con fines pedagógicos, basados en situaciones que ilustran el quehacer forense, pero sin intención alguna de representar o exponer a personas reales. Cualquier similitud con la realidad es mera coincidencia.&lt;/p&gt;
+&lt;&lt;set $clics = 0&gt;&gt;</tw-passagedata><tw-passagedata pid="8" name="Creditos" tags="MacetaSola nobr" position="775,325" size="100,100">&lt;div class=&quot;titulo-bloque&quot;&gt;&lt;h1&gt;VERIFACTO&lt;/h1&gt;&lt;p class=&quot;version&quot;&gt;versión 1.0.0&lt;/p&gt;&lt;/div&gt;
+&lt;h2 style=&quot;text-align: center; margin: 0; font-weight: 400;&quot;&gt;Reconstrucción de hechos&lt;/h2&gt;
+&lt;p style=&quot;text-align: center; margin: 0;&quot;&gt;a partir de fragmentos de testimonio&lt;/p&gt;
+&lt;div class=&quot;info-panel&quot;&gt;
+&lt;div class=&quot;info-barra&quot;&gt;&lt;div class=&quot;info-regresar&quot;&gt;[[Regresar|Inicio]]&lt;/div&gt;&lt;/div&gt;
+&lt;details class=&quot;info-seccion&quot; name=&quot;info&quot; open&gt;
+&lt;summary&gt;Sobre el programa&lt;img class=&quot;info-tri info-tri-cerrado&quot; src=&quot;assets/tri_cerrado.png&quot; alt=&quot;&quot;&gt;&lt;img class=&quot;info-tri info-tri-abierto&quot; src=&quot;assets/tri_abierto.png&quot; alt=&quot;&quot;&gt;&lt;/summary&gt;
+&lt;div class=&quot;info-cuerpo&quot;&gt;
+&lt;div class=&quot;info-fila&quot;&gt;
+&lt;div class=&quot;info-rotulo&quot;&gt;&lt;span class=&quot;linea chico&quot;&gt;Reconstrucción&lt;/span&gt;&lt;span class=&quot;linea&quot;&gt;&lt;span class=&quot;chico&quot;&gt;de &lt;/span&gt;&lt;span class=&quot;grande&quot;&gt;hechos&lt;/span&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;&lt;p&gt;La ciencia forense consiste en la aplicación del conocimiento científico en apoyo al sistema de justicia. Sin embargo, la &lt;strong&gt;reconstrucción de hechos pasados suele realizarse a partir de datos incompletos&lt;/strong&gt;, sesgados o incluso contaminados. El objetivo del programa es brindar un &lt;strong&gt;espacio interactivo&lt;/strong&gt; que permita a los usuarios &lt;strong&gt;desarrollar la habilidad&lt;/strong&gt; para &lt;strong&gt;reconstruir información a partir de datos fragmentados&lt;/strong&gt;, imprecisos o sesgados, y aun así obtener información útil para la investigación. Algunos casos presentados serán más sencillos que otros, pero todos cuentan con al menos una solución posible.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-		&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-&lt;div id=&quot;SobrePrograma&quot;&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;&lt;button &quot;Compatibilidad +/-&quot;&gt;&gt; 
-	&lt;&lt;set $mostrar to not $mostrar&gt;&gt;
-	&lt;&lt;replace &quot;#Compatibilidad&quot;&gt;&gt;
-		&lt;&lt;if $mostrar&gt;&gt;
-&lt;div class=&quot;instrucciones&quot;&gt;
-&lt;p style=&quot;text-align: justify;&quot;&gt;Este programa se realizó en la plataforma Twine 2.8.1, en el motor SugarCube 2.36.1, que es una extensión de Twine. Se ejecuta en navegadores equivalentes a Chromium 1.56.20 o superiores. Para desplegar los elementos multimedia requiere conexión a Internet. El programa funciona en smartphones, tabletas, laptops y computadoras de escritorio.&lt;/p&gt;
+&lt;div class=&quot;info-fila&quot;&gt;
+&lt;div class=&quot;info-rotulo&quot;&gt;&lt;span class=&quot;linea chico&quot;&gt;Cadena de&lt;/span&gt;&lt;span class=&quot;linea grande&quot;&gt;MARKOV&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;&lt;p&gt;El funcionamiento del programa se basa en &lt;strong&gt;cadenas de Markov&lt;/strong&gt;. Una cadena de Markov es un &lt;strong&gt;modelo matemático que describe procesos&lt;/strong&gt; en los que &lt;strong&gt;cada estado depende únicamente del estado anterior&lt;/strong&gt;. Este tipo de modelado se utiliza en diversos campos, como la inteligencia artificial, la biología y la economía, para representar sistemas donde los eventos ocurren en secuencia. Las cadenas de Markov constituyen uno de los fundamentos en la programación de inteligencias generativas de texto. No obstante, este programa no es una inteligencia artificial, sino una simulación basada en principios similares, aplicada al contexto de los juegos de texto.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-		&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-&lt;div id=&quot;Compatibilidad&quot; &gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;&lt;button &quot;Aviso de Privacidad +/-&quot;&gt;&gt; 
-	&lt;&lt;set $mostrar to not $mostrar&gt;&gt;
-	&lt;&lt;replace &quot;#AvisoPrivacidad&quot;&gt;&gt;
-		&lt;&lt;if $mostrar&gt;&gt;
-&lt;div class=&quot;instrucciones&quot;&gt;
-&lt;p style=&quot;text-align: justify;&quot;&gt;Este aviso tiene como propósito informarte que nuestro programa no recaba datos personales de modo automático de los usuarios. Respetamos tu privacidad y garantizamos que tu identidad se mantendrá completamente anónima por medio de nuestro sistema. Cualquier información que puedas proporcionar de manera voluntaria será tratada con estricta confidencialidad y utilizada únicamente con fines académicos. Si tienes alguna duda o inquietud respecto a la privacidad de tus datos, por favor, contáctanos a través de nuestros canales de comunicación. Agradecemos tu confianza y esperamos que disfrutes este software.&lt;/p&gt;
+&lt;div class=&quot;info-fila&quot;&gt;
+&lt;div class=&quot;info-rotulo&quot;&gt;&lt;span class=&quot;linea chico&quot;&gt;Fragmentos&lt;/span&gt;&lt;span class=&quot;linea grande&quot;&gt;HECHOS&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;&lt;p&gt;Cada caso del programa parte de una historia completa y detallada. A través de un algoritmo, esta historia se fragmenta y reorganiza, procurando mantener coherencia en el relato. Sin embargo, los fragmentos contienen menos información que el texto original, por lo que es tarea del usuario reconstruir los hechos a partir de las pistas disponibles y avanzar en el simulador. Desde una perspectiva técnica, estos pequeños testimonios son ejemplos de narrativas procedurales: relatos generados mediante ecuaciones matemáticas, sin intervención humana directa.&lt;/p&gt;&lt;p class=&quot;info-centrado&quot;&gt;¿Cuántos fragmentos necesitas revisar para comprender los hechos de cada caso?&lt;/p&gt;&lt;p class=&quot;info-centrado&quot;&gt;&lt;strong&gt;Esa es la pregunta central que plantea este software.&lt;/strong&gt;&lt;/p&gt;&lt;p&gt;Todos los casos son completamente ficticios. Los nombres, lugares y eventos han sido creados con fines pedagógicos, basados en situaciones que ilustran el quehacer forense, pero sin intención alguna de representar o exponer a personas reales. Cualquier similitud con la realidad es mera coincidencia.&lt;/p&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-		&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-&lt;div id=&quot;AvisoPrivacidad&quot;&gt;&lt;/div&gt;
-
-
-&lt;p&gt;&lt;/p&gt;
-
-&lt;&lt;button &quot;Equipo de desarrollo +/-&quot;&gt;&gt; 
-	&lt;&lt;set $mostrar to not $mostrar&gt;&gt;
-	&lt;&lt;replace &quot;#EquipoDesarrollo&quot;&gt;&gt;
-		&lt;&lt;if $mostrar&gt;&gt;
-&lt;div class=&quot;instrucciones&quot;&gt;
-&lt;center&gt;
-&lt;p&gt;Idea, guion, ilustraciones (V. 1.0.0) y programación: Vicente Torres Zúñiga&lt;/p&gt;
-&lt;p&gt;Supervisión de testimonios y derecho: Anahy Rodríguez González y Valeria Moscoso&lt;/p&gt;
-&lt;p&gt;Usabilidad:  Reyes Farfán Sánchez&lt;/p&gt;
-
-&lt;/center&gt;
 &lt;/div&gt;
-
-&lt;p&gt;&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;
-		&lt;&lt;/if&gt;&gt;
-	&lt;&lt;/replace&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-&lt;div id=&quot;EquipoDesarrollo&quot;&gt;&lt;/div&gt;
-
-
-&lt;center&gt;
-&lt;h2&gt;&lt;div class=&quot;boton&quot;&gt;[[Regresar al inicio del programa|Inicio]] &lt;/div&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;/p&gt;
-
-
-&lt;p&gt;Este software no es apto para menores de edad y personas susceptibles a temas relacionados con la muerte.&lt;/p&gt;
-
-&lt;p&gt;D. R.©, 2025, UNAM - CC-BY-NC-SA.&lt;/p&gt;
-&lt;img src=&quot;https://www.enacif.unam.mx/wp-content/uploads/2025/01/LogosGral_obscuro.png&quot; style=&quot;width: 20%; height: auto;&quot;&gt;
-&lt;p&gt; Contacto por correo electrónico:&lt;a href=&quot;mailto:vicentetorres@enacif.unam.mx&quot;&gt;vicentetorres@enacif.unam.mx&lt;/a&gt;&lt;/p&gt;
-&lt;/center&gt; 
- 
-&lt;hr&gt;</tw-passagedata><tw-passagedata pid="9" name="SinTestimonios" tags="Derrota" position="525,325" size="100,100">&lt;&lt;script&gt;&gt;
+&lt;/details&gt;
+&lt;details class=&quot;info-seccion&quot; name=&quot;info&quot;&gt;
+&lt;summary&gt;Compatibilidad&lt;img class=&quot;info-tri info-tri-cerrado&quot; src=&quot;assets/tri_cerrado.png&quot; alt=&quot;&quot;&gt;&lt;img class=&quot;info-tri info-tri-abierto&quot; src=&quot;assets/tri_abierto.png&quot; alt=&quot;&quot;&gt;&lt;/summary&gt;
+&lt;div class=&quot;info-cuerpo info-sangrado&quot;&gt;
+&lt;p&gt;Este programa se realizó en la plataforma Twine 2.8.1, en el motor SugarCube 2.36.1, que es una extensión de Twine. Se ejecuta en navegadores equivalentes a Chromium 1.56.20 o superiores.&lt;/p&gt;
+&lt;p&gt;Para desplegar los elementos multimedia requiere conexión a Internet.&lt;/p&gt;
+&lt;p&gt;El programa funciona en smartphones, tabletas, laptops y computadoras de escritorio.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;details class=&quot;info-seccion&quot; name=&quot;info&quot;&gt;
+&lt;summary&gt;Aviso de privacidad&lt;img class=&quot;info-tri info-tri-cerrado&quot; src=&quot;assets/tri_cerrado.png&quot; alt=&quot;&quot;&gt;&lt;img class=&quot;info-tri info-tri-abierto&quot; src=&quot;assets/tri_abierto.png&quot; alt=&quot;&quot;&gt;&lt;/summary&gt;
+&lt;div class=&quot;info-cuerpo info-sangrado&quot;&gt;
+&lt;p&gt;Este aviso tiene como propósito informarte que nuestro programa no recaba datos personales de modo automático de los usuarios.&lt;/p&gt;
+&lt;p&gt;Respetamos tu privacidad y garantizamos que tu identidad se mantendrá completamente anónima por medio de nuestro sistema.&lt;/p&gt;
+&lt;p&gt;Cualquier información que puedas proporcionar de manera voluntaria será tratada con estricta confidencialidad y utilizada únicamente con fines académicos.&lt;/p&gt;
+&lt;p&gt;Si tienes alguna duda o inquietud respecto a la privacidad de tus datos, por favor, contáctanos a través de nuestros canales de comunicación.&lt;/p&gt;
+&lt;p&gt;Agradecemos tu confianza y esperamos que disfrutes este software.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;details class=&quot;info-seccion&quot; name=&quot;info&quot;&gt;
+&lt;summary&gt;Equipo de desarrollo&lt;img class=&quot;info-tri info-tri-cerrado&quot; src=&quot;assets/tri_cerrado.png&quot; alt=&quot;&quot;&gt;&lt;img class=&quot;info-tri info-tri-abierto&quot; src=&quot;assets/tri_abierto.png&quot; alt=&quot;&quot;&gt;&lt;/summary&gt;
+&lt;div class=&quot;info-cuerpo&quot;&gt;
+&lt;p class=&quot;info-credito&quot;&gt;&lt;span class=&quot;rol&quot;&gt;Idea, guion, ilustraciones (V. 1.0.0) y programación:&lt;/span&gt;&lt;span class=&quot;nombre&quot;&gt;Vicente Torres Zúñiga&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;info-credito&quot;&gt;&lt;span class=&quot;rol&quot;&gt;Supervisión de testimonios y derecho:&lt;/span&gt;&lt;span class=&quot;nombre&quot;&gt;Anahy Rodríguez González y Valeria Moscoso&lt;/span&gt;&lt;/p&gt;
+&lt;p class=&quot;info-credito&quot;&gt;&lt;span class=&quot;rol&quot;&gt;Usabilidad:&lt;/span&gt;&lt;span class=&quot;nombre&quot;&gt;Reyes Farfán Sánchez&lt;/span&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/details&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="SinTestimonios" tags="Derrota" position="525,325" size="100,100">&lt;&lt;script&gt;&gt;
   var overlay = document.createElement(&quot;div&quot;);
   overlay.id = &quot;bad-ending-overlay&quot;;
   document.body.appendChild(overlay);
