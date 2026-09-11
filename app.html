@@ -104,11 +104,158 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
 		<div id="init-lacking"><p>Browser lacks capabilities required to play.</p><p>Upgrade or switch to another browser.</p></div>
 		<div id="init-loading"><div>Loading&hellip;</div></div>
 	</div>
-	<tw-storydata name="VERIFACTO" startnode="1" creator="Twine" creator-version="2.10.0" format="SugarCube" format-version="2.37.3" ifid="b0ff6e45-c762-42cb-a0ea-3b346efc2445" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">@import url('https://fonts.googleapis.com/css2?family=Livvic:wght@300;400;600&display=swap');
+	<tw-storydata name="VERIFACTO" startnode="1" creator="Twine" creator-version="2.10.0" format="SugarCube" format-version="2.37.3" ifid="b0ff6e45-c762-42cb-a0ea-3b346efc2445" options="" tags="" zoom="0.6" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">/* ---- Exo 2 ----------------------------------------------------------------
+   Familia completa servida desde assets/EXO2/. Se declaran los 9 pesos en
+   redonda y cursiva. Para cambiar la tipografía de toda
+   la interfaz basta con tocar --font-main, mas abajo. */
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-ExtraLightItalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-SemiBoldItalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Exo 2';
+    src: url('assets/EXO2/Exo2-BlackItalic.ttf') format('truetype');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
 
 :root {
     /* Fuente principal de la interfaz. Cambiar aqui para toda la UI. */
-    --font-main: 'Livvic', Helvetica, Arial, sans-serif;
+    --font-main: 'Exo 2', Helvetica, Arial, sans-serif;
     /* Grosor del marco negro. Unico valor a tocar. */
     --frame-width: 18px;
 }
@@ -403,6 +550,7 @@ textarea:hover {
 .titulo-bloque h1 {
     margin: 0;
     line-height: 1.1;
+    font-weight: 400;
 }
 
 .titulo-bloque .version {
@@ -974,9 +1122,9 @@ $(document).one(":storyready", function () {
 </script><tw-tag name="SinTestimonios" color=""></tw-tag><tw-tag name="fondoCiudad" color="red"></tw-tag><tw-tag name="MacetaSola" color="red"></tw-tag><tw-tag name="Brote" color="red"></tw-tag><tw-tag name="Planta1" color="orange"></tw-tag><tw-tag name="Planta2" color="yellow"></tw-tag><tw-tag name="Planta3" color="green"></tw-tag><tw-tag name="Planta4" color="blue"></tw-tag><tw-tag name="Victoria" color="red"></tw-tag><tw-tag name="Derrota" color="purple"></tw-tag><tw-tag name="Planta0" color="purple"></tw-tag><tw-passagedata pid="1" name="Inicio" tags="MacetaSola" position="900,75" size="100,100">&lt;&lt;set $NumTestimonios = 0&gt;&gt;
 &lt;&lt;set $confettiPlayed = {}&gt;&gt;
 
-&lt;div class=&quot;titulo-bloque&quot;&gt;&lt;h1&gt;VERIFACTO&lt;/h1&gt;&lt;p class=&quot;version&quot;&gt;Versión 1.0.0&lt;/p&gt;&lt;/div&gt;
+&lt;div class=&quot;titulo-bloque&quot;&gt;&lt;h1&gt;VERIFACTO&lt;/h1&gt;&lt;p class=&quot;version&quot;&gt;versión 1.0.0&lt;/p&gt;&lt;/div&gt;
 
-&lt;h2 style=&quot;text-align: center; margin: 0;&quot;&gt;Reconstrucción de hechos&lt;/h2&gt;
+&lt;h2 style=&quot;text-align: center; margin: 0; font-weight: 400;&quot;&gt;Reconstrucción de hechos&lt;/h2&gt;
 
 &lt;p style=&quot;text-align: center; margin: 0;&quot;&gt;a partir de fragmentos de testimonio&lt;/p&gt;
          
