@@ -278,8 +278,8 @@ body, tw-story, tw-passage {
     width: 100% !important;
 }
 
-/* Columna que empuja el pie hasta abajo: #story se estira y ocupa el hueco
-   sobrante, así que el pie queda pegado al borde inferior cuando el pasaje
+/* Columna que empuja el pié hasta abajo: #story se estira y ocupa el hueco
+   sobrante, así que el pié queda pegado al borde inferior cuando el pasaje
    es corto y baja con el texto cuando es largo. El display:flex tiene que
    ganarle al display:block !important de la regla de arriba. */
 body {
@@ -533,8 +533,8 @@ textarea:hover {
 }
 
 #passages {
-  /* Sin min-height: el alto lo reparte el flex de <body>. Un 100vh aqui
-     obligaba a hacer scroll siempre y empujaba el pie fuera de la pantalla. */
+  /* Sin min-height: el alto lo reparte el flex de <body>. Un 100vh aquí
+     obligaba a hacer scroll siempre y empujaba el pié fuera de la pantalla. */
   min-height: 0;
 }
 
@@ -671,7 +671,7 @@ tw-passage > p:has(meter) {
   transform: rotate(90deg)
 }
 
-/* ---- Pie de pagina global ------------------------------------------------
+/* ---- Pié de pagina global ------------------------------------------------
    Banda al final del documento. No es contenido del pasaje: el JS la cuelga
    una sola vez de <body>, así que sale en todos los pasajes y sobrevive a los
    cambios.*/
