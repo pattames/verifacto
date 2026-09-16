@@ -1146,21 +1146,21 @@ body[data-tags~="fondoOscuro"]::before {
     margin-top: 0.8rem;
 }
 
-.ins-masinstr button {
+.ins-masinstr a,
+.ins-masinstr a:hover {
+    display: block;
     width: clamp(7.5rem, 66%, 10.5rem);
     aspect-ratio: 297 / 67;
-    padding: 0;
-    border: none;
     background: url('assets/btn_instrucciones.png') no-repeat center / contain;
+    text-align: left;              /* si no, el text-indent no saca el texto */
     text-indent: -9999px;          /* el texto va dentro del PNG */
     overflow: hidden;
     white-space: nowrap;
-    text-align: left;              /* si no, el text-indent no saca el texto */
-    cursor: pointer;
+    border-bottom: none;
     transition: transform 0.2s ease;
 }
 
-.ins-masinstr button:hover {
+.ins-masinstr a:hover {
     transform: scale(1.04);
 }
 
@@ -1342,6 +1342,22 @@ body[data-tags~="fondoOscuro"]::before {
 
 .ins-botones button:not(:disabled):hover {
     transform: scale(1.04);
+}
+
+/* SugarCube trae una regla global para <button>: fondo azul #35a, #57c al pasar el ratón y gris #444 al deshabilitar. Nuestros siguientes botones son solo una imagen, así que ese fondo se asoma por detrás del PNG. Hay que apagarlo en los cuatro estados y con especificidad suficiente: button:hover (0,1,1) le gana a .ins-trampa (0,1,0). */
+.ins-trampa,
+.ins-trampa:hover,
+.ins-trampa:focus,
+.ins-botones button,
+.ins-botones button:hover,
+.ins-botones button:focus,
+.ins-botones button:disabled,
+#reg-iniciar,
+#reg-iniciar:hover,
+#reg-iniciar:focus {
+    background-color: transparent;
+    border: none;
+    padding: 0;
 }
 
 /* ---- Columna derecha: en qué parte del texto vas ---- */
@@ -1973,16 +1989,6 @@ document.addEventListener("toggle", function (ev) {
         }
     }, true);
 
-    /* +Instrucciones vuelve al principio del texto. */
-    $(document).on("click", "#ins-masinstr", function () {
-        var panel = document.getElementById("ins-texto");
-
-        if (panel) {
-            panel.scrollTop = 0;
-            refrescarProgreso();
-        }
-    });
-
     $(document).on("click", "#ins-entrenamiento", function () {
         if (marcado()) {
             Engine.play("Caso 0");
@@ -2170,7 +2176,7 @@ Te quedan: &#39;&#39;$TestimoniosRestantes&#39;&#39; posibles fragmentos por ver
 &lt;h2&gt;Reconstrucción de hechos&lt;/h2&gt;
 &lt;p class=&quot;reg-sub&quot;&gt;a partir de fragmentos de testimonio&lt;/p&gt;
 &lt;div class=&quot;reg-regresar&quot;&gt;[[Regresar|Inicio]]&lt;/div&gt;
-&lt;div class=&quot;ins-masinstr&quot;&gt;&lt;button id=&quot;ins-masinstr&quot; type=&quot;button&quot;&gt;+Instrucciones&lt;/button&gt;&lt;/div&gt;
+&lt;div class=&quot;ins-masinstr&quot;&gt;[[+Instrucciones|Creditos]]&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;ins-centro&quot;&gt;
 &lt;p class=&quot;ins-titulo&quot;&gt;&lt;img src=&quot;assets/lbl_instrucciones.png&quot; alt=&quot;Instrucciones&quot;&gt;&lt;/p&gt;
