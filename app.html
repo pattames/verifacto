@@ -1121,6 +1121,297 @@ tw-passage > p:has(meter) {
     }
 }
 
+/* ---- Pagina de instrucciones ----------------------------------------------
+   Reutiliza .reg-titulo, .reg-regresar y .reg-marco de la pagina de identificación: la columna de titulo y el marco de corchetes son el mismo componente. */
+
+/* Filtro para oscurecer fondo */
+body[data-tags~="fondoOscuro"]::before {
+    filter: brightness(0.22) saturate(0.7);
+}
+
+.ins-bloque {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: clamp(0.8rem, 3%, 2.4rem);
+    max-width: 68rem;
+    margin: 1.2em auto 0;
+    text-align: left;
+}
+
+/* Botón +Instrucciones */
+.ins-masinstr {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.8rem;
+}
+
+.ins-masinstr button {
+    width: clamp(7.5rem, 66%, 10.5rem);
+    aspect-ratio: 297 / 67;
+    padding: 0;
+    border: none;
+    background: url('assets/btn_instrucciones.png') no-repeat center / contain;
+    text-indent: -9999px;          /* el texto va dentro del PNG */
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;              /* si no, el text-indent no saca el texto */
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.ins-masinstr button:hover {
+    transform: scale(1.04);
+}
+
+/* ---- Columna central ---- */
+.ins-centro {
+    flex: 0 1 36rem;
+    min-width: 0;
+}
+
+.ins-titulo {
+    margin: 0 0 0.2rem 2.4rem;
+}
+
+.ins-titulo img {
+    display: block;
+    width: clamp(9rem, 45%, 15rem);
+    height: auto;
+}
+
+/* Panel gris del texto: alto fijo y con scroll. */
+.ins-texto {
+    max-height: 22rem;
+    overflow-y: auto;
+    padding: 1.6rem 1.8rem;
+    border-radius: 0.7rem;
+    background-color: #787C85;
+    color: #00000E;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    /* Firefox no admite ::-webkit-scrollbar; al menos que combine. */
+    scrollbar-width: thin;
+    scrollbar-color: #1F2737 #777D81;
+}
+
+.ins-texto::-webkit-scrollbar {
+    width: 0.85rem;
+}
+
+.ins-texto::-webkit-scrollbar-track {
+    background: url('assets/scroller_track.png') no-repeat center / 100% 100%;
+}
+
+.ins-texto::-webkit-scrollbar-thumb {
+    background: url('assets/scroller_thumb.png') no-repeat center / 100% 100%;
+}
+
+.ins-texto p {
+    margin: 0 0 0.85em;
+    text-align: left;
+}
+
+.ins-texto p:last-child {
+    margin-bottom: 0;
+}
+
+/* Los últimos párrafos van centrados. */
+.ins-texto p.ins-centrado {
+    text-align: center;
+}
+
+/* ---- Panel gris del compromiso ---- */
+.ins-panel {
+    margin-top: 1rem;
+    padding: 1.5rem 1.8rem;
+    border-radius: 0.7rem;
+    background-color: #787C85;
+    color: #00000E;
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.ins-panel > p {
+    margin: 0 0 0.85em;
+    text-align: left;
+}
+
+/* ---- Caja blanca del compromiso (el texto ya está en el PNG) ---- */
+.ins-trampa {
+    position: relative;
+    display: block;
+    width: clamp(13rem, 68%, 20rem);
+    aspect-ratio: 479 / 208;
+    margin: 1.4rem auto 1.1rem;
+    padding: 0;
+    border: none;
+    background: url('assets/wnd_trampa.png') no-repeat center / contain;
+    text-indent: -9999px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+    cursor: pointer;
+}
+
+/* La marca cae dentro de la casilla vacia que ya trae el PNG: su centro esta al 50.3% / 75.5% de la imagen. */
+.ins-trampa::after {
+    content: "";
+    position: absolute;
+    left: 50.3%;
+    top: 75.5%;
+    width: 4.2%;
+    aspect-ratio: 20 / 21;
+    transform: translate(-50%, -50%);
+    background: url('assets/bln_trampa.png') no-repeat center / contain;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.ins-trampa[aria-pressed="true"]::after {
+    opacity: 1;
+}
+
+.ins-creemos {
+    margin: 0 0 1.2em;
+    text-align: center;
+    font-weight: 700;
+}
+
+/* ---- Opciones finales ---- */
+.ins-opciones {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.4rem;
+}
+
+.ins-adelante {
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.25;
+    text-align: left;
+}
+
+.ins-adelante .ins-linea {
+    display: block;
+}
+
+.ins-botones {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+}
+
+.ins-botones button {
+    width: clamp(9rem, 100%, 13rem);
+    aspect-ratio: 333 / 64;
+    padding: 0;
+    border: none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    text-indent: -9999px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#ins-entrenamiento {
+    background-image: url('assets/btn_entrenamiento.png');
+}
+
+#ins-iniciar {
+    background-image: url('assets/btn_iniciar_verifacto.png');
+}
+
+/* Apagados mientras no se marque el compromiso: el PNG _off ya viene en gris. */
+#ins-entrenamiento:disabled {
+    background-image: url('assets/btn_entrenamiento_off.png');
+}
+
+#ins-iniciar:disabled {
+    background-image: url('assets/btn_iniciar_verifacto_off.png');
+}
+
+.ins-botones button:disabled {
+    cursor: not-allowed;
+}
+
+.ins-botones button:not(:disabled):hover {
+    transform: scale(1.04);
+}
+
+/* ---- Columna derecha: en qué parte del texto vas ---- */
+.ins-progreso {
+    flex: 0 1 8rem;            /* estrecho a propósito: parte en dos renglones */
+    min-width: 0;
+    margin-top: 5.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.1rem;
+}
+
+.ins-progreso span {
+    display: block;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    color: #838D97;
+    transition: color 0.25s ease;
+}
+
+.ins-progreso span.activo {
+    color: #FAFEFE;
+}
+
+@media (max-width: 900px) {
+    /* El indicador de scroll solo tiene sentido junto al panel; en estrecho estorba. */
+    .ins-progreso {
+        display: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .ins-bloque {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.2rem;
+    }
+
+    .ins-centro {
+        flex: none;
+    }
+
+    .ins-masinstr {
+        justify-content: center;
+    }
+
+    .ins-titulo {
+        margin-left: 1.4rem;
+    }
+
+    .ins-opciones {
+        flex-direction: column;
+        gap: 0.9rem;
+    }
+
+    .ins-adelante {
+        text-align: center;
+    }
+
+    /* En columna los botones tienen que centrarse y caber: si no, el 100% de .ins-botones los empuja contra el borde del panel. */
+    .ins-botones {
+        width: 100%;
+        align-items: center;
+    }
+
+    .ins-botones button {
+        width: min(13rem, 100%);
+    }
+}
+
 /* =========================
    CAJA: INSTRUCCIONES
    ========================= */
@@ -1627,6 +1918,98 @@ document.addEventListener("toggle", function (ev) {
         campo.focus();
     });
 })();
+
+
+/* ---- Página de instrucciones ----------------------------------------------
+   Las dos opciones del final solo se encienden al marcar el compromiso, y la columna derecha señala en qué parte del texto vas. */
+(function () {
+    var CASOS = ["CasoA1", "CasoB1", "CasoC1", "CasoD1"];
+
+    function marcado() {
+        var caja = document.getElementById("ins-trampa");
+        return !!caja && caja.getAttribute("aria-pressed") === "true";
+    }
+
+    function refrescarBotones() {
+        var listo = marcado();
+
+        ["ins-entrenamiento", "ins-iniciar"].forEach(function (id) {
+            var boton = document.getElementById(id);
+
+            if (boton) {
+                boton.disabled = !listo;
+            }
+        });
+    }
+
+    /* Reparte el scroll del panel entre los rótulos de la derecha. */
+    function refrescarProgreso() {
+        var panel = document.getElementById("ins-texto");
+        var lista = document.getElementById("ins-progreso");
+
+        if (!panel || !lista) {
+            return;
+        }
+
+        var rotulos = lista.getElementsByTagName("span");
+        var margen = panel.scrollHeight - panel.clientHeight;
+        var razon = margen > 1 ? panel.scrollTop / margen : 0;
+        var activo = Math.round(razon * (rotulos.length - 1));
+
+        Array.prototype.forEach.call(rotulos, function (rotulo, i) {
+            rotulo.classList.toggle("activo", i === activo);
+        });
+    }
+
+    $(document).on("click", "#ins-trampa", function () {
+        this.setAttribute("aria-pressed", marcado() ? "false" : "true");
+        refrescarBotones();
+    });
+
+    /* "scroll" no burbujea, así que la delegación normal de jQuery no lo vería: hay que escucharlo en fase de captura. */
+    document.addEventListener("scroll", function (ev) {
+        if (ev.target && ev.target.id === "ins-texto") {
+            refrescarProgreso();
+        }
+    }, true);
+
+    /* +Instrucciones vuelve al principio del texto. */
+    $(document).on("click", "#ins-masinstr", function () {
+        var panel = document.getElementById("ins-texto");
+
+        if (panel) {
+            panel.scrollTop = 0;
+            refrescarProgreso();
+        }
+    });
+
+    $(document).on("click", "#ins-entrenamiento", function () {
+        if (marcado()) {
+            Engine.play("Caso 0");
+        }
+    });
+
+    $(document).on("click", "#ins-iniciar", function () {
+        if (!marcado()) {
+            return;
+        }
+
+        var i = typeof random === "function"
+            ? random(0, CASOS.length - 1)
+            : Math.floor(Math.random() * CASOS.length);
+
+        Engine.play(CASOS[i]);
+    });
+
+    $(document).on(":passageend", function () {
+        if (!document.getElementById("ins-texto")) {
+            return;
+        }
+
+        refrescarBotones();
+        refrescarProgreso();
+    });
+})();
 </script><tw-tag name="SinTestimonios" color=""></tw-tag><tw-tag name="fondoCiudad" color="red"></tw-tag><tw-tag name="MacetaSola" color="red"></tw-tag><tw-tag name="Brote" color="red"></tw-tag><tw-tag name="Planta1" color="orange"></tw-tag><tw-tag name="Planta2" color="yellow"></tw-tag><tw-tag name="Planta3" color="green"></tw-tag><tw-tag name="Planta4" color="blue"></tw-tag><tw-tag name="Victoria" color="red"></tw-tag><tw-tag name="Derrota" color="purple"></tw-tag><tw-tag name="Planta0" color="purple"></tw-tag><tw-passagedata pid="1" name="Inicio" tags="MacetaSola" position="900,75" size="100,100">&lt;&lt;set $NumTestimonios = 0&gt;&gt;
 &lt;&lt;set $confettiPlayed = {}&gt;&gt;
 
@@ -1779,51 +2162,55 @@ Te quedan: &#39;&#39;$TestimoniosRestantes&#39;&#39; posibles fragmentos por ver
     .catch(error =&gt; console.error(&quot;Error al enviar datos:&quot;, error));
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;set $clics2 = 0&gt;&gt;
-</tw-passagedata><tw-passagedata pid="6" name="Instruccion" tags="MacetaSola" position="900,325" size="100,100">&lt;div class=&quot;instrucciones&quot;&gt; 
-&lt;h1&gt;INSTRUCCIONES&lt;/h1&gt;
-
-&lt;p style=&quot;text-align: justify;&quot;&gt;Tienes en tus manos fragmentos de testimonios recabados por policías en el lugar de los hechos. Los agentes eran inexpertos y los testigos, nerviosos. Estos testimonios provienen de notas escritas a mano y ahora fueron transcritos en este formato. En otras palabras, la información es un rompecabezas que debes armar.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: justify;&quot;&gt;Tu tarea es analizar los testimonios parciales para ayudarnos a reconstruir lo ocurrido. Sin embargo, hay un reto: los fragmentos están desordenados y pueden ser inconsistentes. Cada vez que hagas clic en el enlace &quot;REVISAR OTRO FRAGMENTO DEL MISMO CASO.&quot;, aparecerá un nuevo fragmento. &lt;/p&gt;
-
-&lt;p style=&quot;text-align: justify;&quot;&gt;¡Pero cuidado! Si vuelves a hacer clic, recibirás otro fragmento y el anterior se perderá para siempre. No hay forma de recuperarlo. Por eso, es clave que tomes notas a mano. Puedes revisar hasta veinte fragmentos en total, así que administra bien tus oportunidades. Las vas a necesitar. &lt;/p&gt;
-
-&lt;p style=&quot;text-align: justify;&quot;&gt;Tu meta es reunir suficiente información para responder preguntas de opción múltiple y elaborar una línea de tiempo. Debes responder: ¿Quiénes estuvieron involucrados? ¿Dónde y cuándo ocurrió el hecho? ¿Qué objetos fueron relevantes en la escena? Entre otras preguntas.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: justify;&quot;&gt;Por razones de seguridad y confidencialidad, no puedes hacer capturas de pantalla ni copiar y pegar el texto de forma digital. Solo puedes registrar la información en una libreta.&lt;/p&gt;
-
-&lt;p style=&quot;text-align: justify;&quot;&gt;Antes de presentarte el primero de los cuatro casos del programa, harás una actividad de entrenamiento para familiarizarte con la interfaz y la dinámica general. A medida que avances en los niveles, la dificultad aumentará, por lo que deberás cuidar el número de veces que consultas los testimonios.&lt;/p&gt;
+</tw-passagedata><tw-passagedata pid="6" name="Instruccion" tags="MacetaSola nobr fondoOscuro" position="900,325" size="100,100">&lt;div class=&quot;ins-bloque&quot;&gt;
+&lt;div class=&quot;reg-titulo&quot;&gt;
+&lt;h1&gt;VERIFACTO&lt;/h1&gt;
+&lt;p class=&quot;version&quot;&gt;versión 1.0.0&lt;/p&gt;
+&lt;hr class=&quot;reg-regla&quot;&gt;
+&lt;h2&gt;Reconstrucción de hechos&lt;/h2&gt;
+&lt;p class=&quot;reg-sub&quot;&gt;a partir de fragmentos de testimonio&lt;/p&gt;
+&lt;div class=&quot;reg-regresar&quot;&gt;[[Regresar|Inicio]]&lt;/div&gt;
+&lt;div class=&quot;ins-masinstr&quot;&gt;&lt;button id=&quot;ins-masinstr&quot; type=&quot;button&quot;&gt;+Instrucciones&lt;/button&gt;&lt;/div&gt;
 &lt;/div&gt;
-
-&lt;hr&gt;
-&lt;p&gt;&lt;/p&gt;  
-&lt;p style=&quot;text-align: justify;&quot;&gt;Me comprometo a realizar este ejercicio con honestidad, sin recurrir a ayudas externas como inteligencias artificiales o capturas de pantalla o ayudas de terceros. Pondré toda mi atención en la actividad y tomaré notas para aprovechar al máximo esta experiencia de aprendizaje.&lt;/p&gt;
-
-&lt;div style=&quot;text-align:center;&quot;&gt;
-&lt;&lt;button &quot;¡PROMETO NO HACER TRAMPA! &quot;&gt;&gt;
-&lt;&lt;replace &quot;#resultado&quot;&gt;&gt;
-&lt;p&gt;&lt;/p&gt;
-&lt;p&gt;&lt;h2&gt;Creemos en tu compromiso. ¡Adelante!&lt;/h2&gt;&lt;/p&gt;
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2&gt;&lt;div class=&quot;boton&quot;&gt;[[Vamos al caso de entrenamiento|Caso 0]]&lt;/div&gt;&lt;/h2&gt;
- 
- &lt;p&gt;&lt;h2&gt;o bien&lt;/h2&gt;&lt;/p&gt; 
-
-&lt;p&gt;&lt;/p&gt;
-&lt;&lt;set _caso to either(&quot;[[Vamos a saltarnos el entrenamiento. |CasoA1]]&quot;, &quot;[[Vamos a saltarnos el entrenamiento. |CasoB1]]&quot;, &quot;[[Vamos a saltarnos el entrenamiento. |CasoC1]]&quot;, &quot;[[Vamos a saltarnos el entrenamiento. |CasoD1]]&quot;)&gt;&gt;
-   
- &lt;p&gt;&lt;h2&gt;¡Vamos directo a la acción!&lt;/h2&gt;&lt;/p&gt;
- &lt;h2&gt;&lt;p&gt;&lt;div class=&quot;boton&quot;&gt;_caso&lt;/div&gt;&lt;/p&gt;&lt;/h2&gt;
-     
-  &lt;&lt;/replace&gt;&gt;
-&lt;&lt;/button&gt;&gt;
-
-&lt;div id=&quot;resultado&quot;&gt;&lt;/div&gt;
-
+&lt;div class=&quot;ins-centro&quot;&gt;
+&lt;p class=&quot;ins-titulo&quot;&gt;&lt;img src=&quot;assets/lbl_instrucciones.png&quot; alt=&quot;Instrucciones&quot;&gt;&lt;/p&gt;
+&lt;div class=&quot;reg-marco&quot;&gt;
+&lt;div class=&quot;ins-texto&quot; id=&quot;ins-texto&quot; tabindex=&quot;0&quot;&gt;
+&lt;p&gt;Tienes en tus manos &lt;strong&gt;fragmentos de testimonios&lt;/strong&gt; recabados por policías en el lugar de los hechos.&lt;/p&gt;
+&lt;p&gt;Los &lt;strong&gt;agentes&lt;/strong&gt; eran &lt;strong&gt;inexpertos&lt;/strong&gt;, y los &lt;strong&gt;testigos nerviosos&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Estos testimonios provienen de apuntes escritos a mano alzada y ahora han sido transcritos en este formato.&lt;/p&gt;
+&lt;p&gt;En otras palabras, &lt;strong&gt;la información es un rompecabezas que debes armar&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Tu tarea es &lt;strong&gt;analizar los testimonios&lt;/strong&gt; parciales para ayudarnos a &lt;strong&gt;reconstruir lo sucedido&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Sin embargo, hay un reto: los &lt;strong&gt;fragmentos&lt;/strong&gt; están &lt;strong&gt;desordenados&lt;/strong&gt; y pueden ser &lt;strong&gt;inconsistentes&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Cada vez que hagas clic en el enlace &quot;&lt;strong&gt;REVISAR OTRO FRAGMENTO DEL MISMO CASO&lt;/strong&gt;.&quot;, aparecerá un nuevo fragmento.&lt;/p&gt;
+&lt;p class=&quot;ins-centrado&quot;&gt;Por razones de seguridad y confidencialidad, no puedes hacer capturas de pantalla ni copiar y pegar digitalmente el texto.&lt;/p&gt;
+&lt;p class=&quot;ins-centrado&quot;&gt;Solo puedes registrar tu información en una libreta.&lt;/p&gt;
+&lt;p class=&quot;ins-centrado&quot;&gt;Antes de presentarte el primero de los cuatro casos que conforman el programa, realizarás una actividad de entrenamiento que te permitirá familiarizarte con la interfaz y la dinámica general.&lt;/p&gt;
+&lt;p class=&quot;ins-centrado&quot;&gt;A medida que avances en niveles, la dificultad aumentará, por lo que deberás administrar cuidadosamente el número de veces que consultas los testimonios.&lt;/p&gt;
 &lt;/div&gt;
-&lt;p&gt;&lt;/p&gt;
-&lt;hr&gt;</tw-passagedata><tw-passagedata pid="7" name="CuestionarioA1" tags="Planta1" position="450,775" size="100,100">&lt;h1&gt; PRIMER CUESTIONARIO&lt;/h1&gt;	
+&lt;div class=&quot;ins-panel&quot;&gt;
+&lt;p&gt;&lt;strong&gt;Me comprometo a&lt;/strong&gt; realizar este ejercicio &lt;strong&gt;con honestidad&lt;/strong&gt;, &lt;strong&gt;sin recurrir a ayudas externas&lt;/strong&gt; como inteligencias artificiales o capturas de pantalla o &lt;strong&gt;ayudas de terceros&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pondré&lt;/strong&gt; toda mi &lt;strong&gt;atención&lt;/strong&gt; en la actividad y &lt;strong&gt;tomaré notas&lt;/strong&gt; para aprovechar al máximo esta experiencia de aprendizaje.&lt;/p&gt;
+&lt;button class=&quot;ins-trampa&quot; id=&quot;ins-trampa&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;¡PROMETO NO HACER TRAMPA!&lt;/button&gt;
+&lt;p class=&quot;ins-creemos&quot;&gt;Creemos en tu compromiso.&lt;/p&gt;
+&lt;div class=&quot;ins-opciones&quot;&gt;
+&lt;p class=&quot;ins-adelante&quot;&gt;&lt;span class=&quot;ins-linea&quot;&gt;¡Adelante&lt;/span&gt;&lt;span class=&quot;ins-linea&quot;&gt;selecciona&lt;/span&gt;&lt;span class=&quot;ins-linea&quot;&gt;una opción!&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;ins-botones&quot;&gt;
+&lt;button id=&quot;ins-entrenamiento&quot; type=&quot;button&quot; disabled&gt;Entrenamiento&lt;/button&gt;
+&lt;button id=&quot;ins-iniciar&quot; type=&quot;button&quot; disabled&gt;Iniciar VERIFACTO&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;ins-progreso&quot; id=&quot;ins-progreso&quot;&gt;
+&lt;span&gt;Reconstrucción de hechos&lt;/span&gt;
+&lt;span&gt;Reconstrucción de hechos&lt;/span&gt;
+&lt;span&gt;Reconstrucción de hechos&lt;/span&gt;
+&lt;span&gt;Reconstrucción de hechos&lt;/span&gt;
+&lt;span&gt;Reconstrucción de hechos&lt;/span&gt;
+&lt;/div&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="7" name="CuestionarioA1" tags="Planta1" position="450,775" size="100,100">&lt;h1&gt; PRIMER CUESTIONARIO&lt;/h1&gt;	
 &lt;p&gt;Selecciona la mejor respuesta a la pregunta o que complete la frase.&lt;/p&gt;
 &lt;&lt;set $Nombre = &quot;CuestionarioA4&quot;&gt;&gt;
 
