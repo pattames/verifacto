@@ -1440,6 +1440,17 @@ body[data-tags~="fondoOscuro"]::before {
     text-align: left;
 }
 
+/* Identificador del caso (entrenamiento o real): La referencia no lo trae, pero sin él la pantalla de entrenamiento y la de un caso real son idénticas y no se distinguen. */
+.caso-nombre {
+    margin: 0.9rem 0 0;
+    text-align: right;
+    font-size: clamp(0.85rem, 2.6vw, 1.05rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9FB3C8;
+}
+
 /* ---- Marcador de 20 puntos/fragmentos ---- */
 /* Dos filas de diez: con grid-auto-flow:column los puntos se colocan por columnas, que es el orden en que se encienden en la referencia. */
 .caso-puntos {
@@ -1611,6 +1622,7 @@ body[data-tags~="fondoOscuro"]::before {
         justify-content: center;
     }
 
+    .caso-nombre,
     .caso-contador,
     .caso-aviso {
         text-align: center;
@@ -2259,6 +2271,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoA1&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaA1&#x27;, 150)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 1 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioA1&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -2276,6 +2289,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoA2&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaA2&#x27;, 140)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 2 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioA2&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -2651,6 +2665,7 @@ document.addEventListener("toggle", function (ev) {
 </tw-passagedata><tw-passagedata pid="12" name="Caso 0" tags="Brote nobr fondoOscuro" position="900,450" size="100,100">&lt;&lt;set $NumTestimonios += 1&gt;&gt;
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $fragmento = &quot;Como testigo puedo afirmar: Una niña llamada Mary va a la playa con su madre y su hermano. Viajan  en un coche rojo. En la playa nadan, toman un helado, juegan en la arena y almuerzan unos sándwiches&lt;strong class=&#x27;ellipsis&#x27;&gt;...&lt;/strong&gt;&quot;&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Entrenamiento&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;Cuestionario0&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;</tw-passagedata><tw-passagedata pid="13" name="Cuestionario0" tags="Brote" position="800,550" size="100,100">&lt;h1&gt;CUESTIONARIO DE ENTRENAMIENTO&lt;/h1&gt;	
 &lt;p&gt;Selecciona la mejor respuesta a la pregunta o que complete la frase.&lt;/p&gt;
@@ -2737,6 +2752,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoA3&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaA3&#x27;, 130)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 3 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioA3&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -2840,6 +2856,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoA4&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaA4&#x27;, 100)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 4 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioA4&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -2942,6 +2959,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoB1&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaB1&#x27;, 150)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 1 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioB1&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3045,6 +3063,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoB2&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaB2&#x27;, 140)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 2 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioB2&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3146,6 +3165,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoB3&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaB3&#x27;, 130)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 3 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioB3&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3249,6 +3269,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoB4&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaB4&#x27;, 100)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 4 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioB4&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3350,6 +3371,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoC1&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaC1&#x27;, 150)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 1 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioC1&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3455,6 +3477,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoC2&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaC2&#x27;, 140)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 2 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioC2&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3559,6 +3582,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoC3&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaC3&#x27;, 130)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 3 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioC3&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3661,6 +3685,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoC4&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaC4&#x27;, 100)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 4 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioC4&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3763,6 +3788,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoD1&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaD1&#x27;, 150)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 1 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioD1&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3866,6 +3892,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoD2&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaD2&#x27;, 140)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 2 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioD2&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -3968,6 +3995,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoD3&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaD3&#x27;, 130)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 3 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioD3&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -4071,6 +4099,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;set $TestimoniosRestantes = 20 - $NumTestimonios&gt;&gt;
 &lt;&lt;set $Nombre = &quot;CasoD4&quot;&gt;&gt;
 &lt;&lt;set $fragmento = markov(&#x27;historiaD4&#x27;, 100)&gt;&gt;
+&lt;&lt;set $casoTitulo = &quot;Caso 4 de 4&quot;&gt;&gt;
 &lt;&lt;set $cuestionario = &quot;CuestionarioD4&quot;&gt;&gt;
 &lt;&lt;fragmento&gt;&gt;
 &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
@@ -7077,6 +7106,7 @@ Asigna un número del 0 al 9 a cada enunciado. 0 = no es un hecho del testimonio
 &lt;h2&gt;Reconstrucción de hechos&lt;/h2&gt;\
 &lt;p class=&quot;reg-sub&quot;&gt;a partir de fragmentos de testimonio&lt;/p&gt;\
 &lt;hr class=&quot;reg-regla&quot;&gt;\
+&lt;p class=&quot;caso-nombre&quot;&gt;&lt;&lt;= $casoTitulo&gt;&gt;&lt;/p&gt;\
 &lt;div class=&quot;caso-puntos&quot; id=&quot;caso-puntos&quot; @data-usados=&quot;$NumTestimonios&quot;&gt;&lt;/div&gt;\
 &lt;p class=&quot;caso-contador&quot;&gt;&lt;&lt;= $NumTestimonios&gt;&gt;/20&lt;/p&gt;\
 &lt;p class=&quot;caso-aviso&quot;&gt;Te quedan &lt;&lt;= $TestimoniosRestantes&gt;&gt; fragmentos si llegas a 0 no podrás continuar&lt;/p&gt;\
