@@ -1639,6 +1639,145 @@ body[data-tags~="fondoOscuro"]::before {
     }
 }
 
+/* ---- Pantalla "fragmentos agotados" (pasaje SinTestimonios) ---------------------
+   Reutiliza la columna, el marco y la tarjeta de la pantalla de "fragmento". Lo propio es el rojo a textos y el segundo marcador grande dentro de la tarjeta. */
+
+/* En esta pantalla, el contador lateral y el aviso de abajo van en rojo, no en blanco. */
+.sin-agotado .caso-contador,
+.sin-agotado .caso-aviso {
+    color: #FF0000;
+}
+
+.sin-centro {
+    flex: 0 1 36rem;
+    min-width: 0;
+}
+
+.sin-rotulo {
+    margin: 0 0 0.2rem;
+    text-align: center;
+    font-size: clamp(1rem, 3.2vw, 1.5rem);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #E50203;
+}
+
+.sin-quedan {
+    margin: 0 0 1rem;
+    text-align: center;
+    font-size: clamp(0.72rem, 2.2vw, 0.88rem);
+}
+
+.sin-nombre {
+    margin: 0 0 0.7em;
+    text-align: center;
+    font-size: clamp(1.1rem, 3.4vw, 1.5rem);
+    font-weight: 400;
+}
+
+.sin-gracias {
+    margin: 1em 0;
+    text-align: center;
+    font-size: clamp(1rem, 3vw, 1.3rem);
+    font-weight: 400;
+}
+
+/* El marcador grande de la tarjeta: mismos colores, puntos más gordos. */
+.sin-puntos {
+    justify-content: center;
+    gap: 0.85rem;
+    margin: 1.7rem 0;
+}
+
+.sin-puntos i {
+    width: 1.4rem;
+    height: 1.4rem;
+    box-shadow: 0 0.12rem 0.2rem rgba(0, 0, 0, 0.35);
+}
+
+.sin-marcador {
+    margin: 0 0 1em;
+    text-align: center;
+    font-size: clamp(1.8rem, 5.5vw, 2.9rem);
+    font-weight: 400;
+    line-height: 1.05;
+    color: #FF0000;
+}
+
+/* ---- Botones propios de esta pantalla ---- */
+/* PNG de "Regresar al inicio". */
+.sin-inicio a,
+.sin-inicio a:hover {
+    background-image: url('assets/btn_regresar_inicio.png');
+    aspect-ratio: 303 / 54;
+}
+
+.sin-info a,
+.sin-info a:hover {
+    background-image: url('assets/informacion_btn.png');
+    aspect-ratio: 306 / 64;
+}
+
+/* Botón "CUESTIONARIO" no tiene PNG en assets (pendiente). Así que se dibuja con CSS. */
+.sin-cuestionario a,
+.sin-cuestionario a:hover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: clamp(6.5rem, 16vw, 9rem);
+    aspect-ratio: 302 / 63;
+    border-radius: 0.3rem;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: linear-gradient(180deg, #2b8cf0 0%, #1a65bc 32%, #124a93 62%, #021440 100%);
+    color: #FFFFFF;
+    font-size: clamp(0.66rem, 2vw, 0.82rem);
+    text-indent: 0;                /* este si lleva el texto en el HTML */
+    text-align: center;
+    border-bottom: none;
+    transition: transform 0.2s ease;
+}
+
+.sin-cuestionario a:hover {
+    transform: scale(1.04);
+}
+
+/* SugarCube marca los enlaces externos con un icono via ::after; aquí sobra. */
+.sin-cuestionario a::after {
+    content: none !important;
+}
+
+/* La flecha azul va pegada al botón, no separada por el gap de .caso-accion. */
+.sin-cuestionario {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+/* La flecha azul que acompaña al botón. */
+.sin-flecha {
+    flex: none;
+    width: 0;
+    height: 0;
+    border-top: 0.55rem solid transparent;
+    border-bottom: 0.55rem solid transparent;
+    border-left: 0.75rem solid #1a65bc;
+}
+
+@media (max-width: 760px) {
+    .sin-centro {
+        flex: none;
+    }
+
+    .sin-puntos {
+        gap: 0.45rem;
+    }
+
+    .sin-puntos i {
+        width: 0.85rem;
+        height: 0.85rem;
+    }
+}
+
 /* =========================
    CAJA: INSTRUCCIONES
    ========================= */
@@ -2235,13 +2374,7 @@ document.addEventListener("toggle", function (ev) {
     var TOTAL = 20;
     var COLORES = ["#3DA329", "#01A6FC", "#FF8B0C", "#D85000", "#F10501"];
 
-    function pintarPuntos() {
-        var caja = document.getElementById("caso-puntos");
-
-        if (!caja) {
-            return;
-        }
-
+    function pintarUno(caja) {
         var usados = Number(caja.getAttribute("data-usados")) || 0;
         var trozos = [];
 
@@ -2254,6 +2387,14 @@ document.addEventListener("toggle", function (ev) {
         }
 
         caja.innerHTML = trozos.join("");
+    }
+
+    /* Por clase y no por id: la pantalla de "fragmentos agotados" lleva dos marcadores, el de la columna y el grande de la tarjeta. */
+    function pintarPuntos() {
+        Array.prototype.forEach.call(
+            document.querySelectorAll(".caso-puntos"),
+            pintarUno
+        );
     }
 
     $(document).on(":passageend", pintarPuntos);
@@ -2487,7 +2628,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;p class=&quot;info-credito&quot;&gt;&lt;span class=&quot;rol&quot;&gt;Usabilidad:&lt;/span&gt;&lt;span class=&quot;nombre&quot;&gt;Reyes Farfán Sánchez&lt;/span&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/details&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="SinTestimonios" tags="Derrota" position="525,325" size="100,100">&lt;&lt;script&gt;&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="SinTestimonios" tags="Derrota nobr fondoOscuro" position="525,325" size="100,100">&lt;&lt;script&gt;&gt;
   var overlay = document.createElement(&quot;div&quot;);
   overlay.id = &quot;bad-ending-overlay&quot;;
   document.body.appendChild(overlay);
@@ -2500,30 +2641,51 @@ document.addEventListener("toggle", function (ev) {
     overlay.remove();
   }, 2000);
 &lt;&lt;/script&gt;&gt;
-
-
-&lt;h1 style=&quot;text-align: center;&quot;&gt;&lt;b&gt;¡Ups!😞 Te terminaste tus oportunidades para leer testimonios 💔&lt;/b&gt;
-&lt;/h1&gt;
-
-&lt;h2&gt;&lt;p&gt;&lt;b&gt;$username se te presentaron $NumTestimonios de 20 posibles.
-&lt;/b&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;b&gt;¡Gracias por tu esfuerzo! 😊&lt;/b&gt;&lt;/p&gt;
+&lt;div class=&quot;caso-bloque sin-agotado&quot;&gt;
+&lt;div class=&quot;reg-titulo&quot;&gt;
+&lt;h1&gt;VERIFACTO&lt;/h1&gt;
+&lt;p class=&quot;version&quot;&gt;versión 1.0.0&lt;/p&gt;
+&lt;hr class=&quot;reg-regla&quot;&gt;
+&lt;h2&gt;Reconstrucción de hechos&lt;/h2&gt;
+&lt;p class=&quot;reg-sub&quot;&gt;a partir de fragmentos de testimonio&lt;/p&gt;
+&lt;hr class=&quot;reg-regla&quot;&gt;
+&lt;div class=&quot;caso-puntos&quot; data-usados=&quot;20&quot;&gt;&lt;/div&gt;
+&lt;p class=&quot;caso-contador&quot;&gt;20/20&lt;/p&gt;
+&lt;p class=&quot;caso-aviso&quot;&gt;Te quedan 0 fragmentos si llegas a 0 no podrás continuar&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;sin-centro&quot;&gt;
+&lt;p class=&quot;sin-rotulo&quot;&gt;SIN FRAGMENTOS DE TESTIMONIO&lt;/p&gt;
+&lt;div class=&quot;reg-marco&quot;&gt;
+&lt;div class=&quot;caso-tarjeta&quot;&gt;
+&lt;p class=&quot;sin-quedan&quot;&gt;Te quedan &lt;strong&gt;0&lt;/strong&gt; fragmentos disponibles para consulta.&lt;/p&gt;
+&lt;div class=&quot;caso-panel&quot;&gt;
+&lt;p class=&quot;sin-nombre&quot;&gt;&lt;&lt;= $username&gt;&gt;&lt;/p&gt;
+&lt;p&gt;Se te presentaron &lt;strong&gt;20&lt;/strong&gt; de &lt;strong&gt;20&lt;/strong&gt; posibles.&lt;/p&gt;
+&lt;p class=&quot;sin-gracias&quot;&gt;¡Gracias por tu esfuerzo!&lt;/p&gt;
 &lt;p&gt;Ya no quedan más oportunidades para revisar testimonios.&lt;/p&gt;
-
-
-&lt;p&gt;Por el momento, la actividad ha concluido, pero cada intento cuenta para tu aprendizaje. 🌱✨&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://forms.gle/WSZLqGRhfmvPmu1CA&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;
-👉 Contesta este cuestionario y ayudanos a mejorar tu experiencia con el programa.&lt;/a&gt;&lt;/p&gt;
-
-
-&lt;p&gt;[[🔄 También puedes reiniciar el programa |Inicio]]&lt;/p&gt;
-&lt;p&gt;o bien&lt;/p&gt;
-&lt;p&gt;[[📜 Puedes revisar la información y créditos |Creditos]]&lt;/p&gt;
-&lt;/h2&gt;
-  &lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
-
+&lt;div class=&quot;caso-puntos sin-puntos&quot; data-usados=&quot;20&quot;&gt;&lt;/div&gt;
+&lt;p class=&quot;sin-marcador&quot;&gt;20/20&lt;/p&gt;
+&lt;p&gt;Por el momento, la actividad ha concluido, pero cada intento cuenta para tu aprendizaje.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class=&quot;caso-acciones&quot;&gt;
+&lt;div class=&quot;caso-accion&quot;&gt;
+&lt;p class=&quot;caso-etiqueta&quot;&gt;&lt;span class=&quot;caso-linea&quot;&gt;Contesta este cuestionario&lt;/span&gt;&lt;span class=&quot;caso-linea&quot;&gt;y ayudanos a mejorar tu&lt;/span&gt;&lt;span class=&quot;caso-linea&quot;&gt;experiencia con el programa.&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;caso-btn sin-cuestionario&quot;&gt;&lt;a href=&quot;https://forms.gle/WSZLqGRhfmvPmu1CA&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;CUESTIONARIO&lt;/a&gt;&lt;span class=&quot;sin-flecha&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;caso-accion&quot;&gt;
+&lt;p class=&quot;caso-etiqueta&quot;&gt;&lt;span class=&quot;caso-linea&quot;&gt;También puedes&lt;/span&gt;&lt;span class=&quot;caso-linea&quot;&gt;reiniciar el programa.&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;caso-btn sin-inicio&quot;&gt;[[Regresar al inicio|Inicio]]&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;caso-accion&quot;&gt;
+&lt;p class=&quot;caso-etiqueta&quot;&gt;&lt;span class=&quot;caso-linea&quot;&gt;O bien puedes revisar la&lt;/span&gt;&lt;span class=&quot;caso-linea&quot;&gt;información y créditos&lt;/span&gt;&lt;/p&gt;
+&lt;div class=&quot;caso-btn sin-info&quot;&gt;[[+INFORMACIÓN|Creditos]]&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;&lt;set $miVariable = $username + &quot;;&quot; + $Nombre +&quot;;&quot; + $clics2 &gt;&gt;
 &lt;&lt;script&gt;&gt;
   var scriptUrl = &quot;https://script.google.com/macros/s/AKfycbyxSDWL19fAM3Q3M5lM7YZFdQCurFsY_LV5xcrnhftlAkONKc-6T8XBPhLsKvoo6SCTmg/exec&quot;;
 
@@ -2536,8 +2698,7 @@ document.addEventListener("toggle", function (ev) {
 &lt;&lt;/script&gt;&gt;
 &lt;&lt;set $NumTestimonios = 0&gt;&gt;
 &lt;&lt;set $clics1 = 0&gt;&gt;
-&lt;&lt;set $clics2 = 0&gt;&gt;
-</tw-passagedata><tw-passagedata pid="10" name="CuestionarioA2" tags="Planta2" position="450,1000" size="100,100">&lt;&lt;set $Nombre = &quot;CuestionarioA2&quot;&gt;&gt;
+&lt;&lt;set $clics2 = 0&gt;&gt;</tw-passagedata><tw-passagedata pid="10" name="CuestionarioA2" tags="Planta2" position="450,1000" size="100,100">&lt;&lt;set $Nombre = &quot;CuestionarioA2&quot;&gt;&gt;
 
 &lt;h1&gt;SEGUNDO CUESTIONARIO&lt;/h1&gt;	
 &lt;p&gt;Selecciona la mejor respuesta a la pregunta o que complete la frase.&lt;/p&gt;
