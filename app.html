@@ -1718,49 +1718,16 @@ body[data-tags~="fondoOscuro"]::before {
     aspect-ratio: 306 / 64;
 }
 
-/* Botón "CUESTIONARIO" no tiene PNG en assets (pendiente). Así que se dibuja con CSS. */
+/* Botón "CUESTIONARIO" con PNG propio. */
 .sin-cuestionario a,
 .sin-cuestionario a:hover {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: clamp(6.5rem, 16vw, 9rem);
-    aspect-ratio: 302 / 63;
-    border-radius: 0.3rem;
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    background: linear-gradient(180deg, #2b8cf0 0%, #1a65bc 32%, #124a93 62%, #021440 100%);
-    color: #FFFFFF;
-    font-size: clamp(0.66rem, 2vw, 0.82rem);
-    text-indent: 0;                /* este si lleva el texto en el HTML */
-    text-align: center;
-    border-bottom: none;
-    transition: transform 0.2s ease;
+    background-image: url('assets/btn_cuestionario.png');
+    aspect-ratio: 303 / 64;
 }
 
-.sin-cuestionario a:hover {
-    transform: scale(1.04);
-}
-
-/* SugarCube marca los enlaces externos con un icono via ::after; aquí sobra. */
+/* SugarCube marca los enlaces externos con un icono vía ::after; aquí sobra. */
 .sin-cuestionario a::after {
     content: none !important;
-}
-
-/* La flecha azul va pegada al botón, no separada por el gap de .caso-accion. */
-.sin-cuestionario {
-    display: flex;
-    align-items: center;
-    gap: 0.35rem;
-}
-
-/* La flecha azul que acompaña al botón. */
-.sin-flecha {
-    flex: none;
-    width: 0;
-    height: 0;
-    border-top: 0.55rem solid transparent;
-    border-bottom: 0.55rem solid transparent;
-    border-left: 0.75rem solid #1a65bc;
 }
 
 @media (max-width: 760px) {
@@ -3014,7 +2981,7 @@ window.contarCorrectas = function () {
 &lt;div class=&quot;caso-acciones&quot;&gt;
 &lt;div class=&quot;caso-accion&quot;&gt;
 &lt;p class=&quot;caso-etiqueta&quot;&gt;&lt;span class=&quot;caso-linea&quot;&gt;Contesta este cuestionario&lt;/span&gt;&lt;span class=&quot;caso-linea&quot;&gt;y ayudanos a mejorar tu&lt;/span&gt;&lt;span class=&quot;caso-linea&quot;&gt;experiencia con el programa.&lt;/span&gt;&lt;/p&gt;
-&lt;div class=&quot;caso-btn sin-cuestionario&quot;&gt;&lt;a href=&quot;https://forms.gle/WSZLqGRhfmvPmu1CA&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;CUESTIONARIO&lt;/a&gt;&lt;span class=&quot;sin-flecha&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;caso-btn sin-cuestionario&quot;&gt;&lt;a href=&quot;https://forms.gle/WSZLqGRhfmvPmu1CA&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;CUESTIONARIO&lt;/a&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&quot;caso-accion&quot;&gt;
 &lt;p class=&quot;caso-etiqueta&quot;&gt;&lt;span class=&quot;caso-linea&quot;&gt;También puedes&lt;/span&gt;&lt;span class=&quot;caso-linea&quot;&gt;reiniciar el programa.&lt;/span&gt;&lt;/p&gt;
