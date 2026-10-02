@@ -252,7 +252,6 @@ var LZString=function(){var r=String.fromCharCode,o="ABCDEFGHIJKLMNOPQRSTUVWXYZa
     font-display: swap;
 }
 
-
 :root {
     /* Fuente principal de la interfaz. Cambiar aqui para toda la UI. */
     --font-main: 'Exo 2', Helvetica, Arial, sans-serif;
@@ -319,7 +318,6 @@ body::after {
     z-index: 9999;
 }
 
-
 tw-passage {
     display: block !important;
     width: 90%;  /* Ajusta el ancho para mejorar justificación */
@@ -339,7 +337,6 @@ tw-passage {
   max-width: 100ch;
 } 
 
-
 a {
 color: white;
 }
@@ -347,7 +344,6 @@ a:hover {
 color: white;
 text-decoration: none;
 }
-
 
 tw-listbox {
     background-color: AliceBlue;
@@ -363,7 +359,6 @@ tw-listbox option {
     color: DarkSlateBlue;
 }
 
-
 select {
     background-color: AliceBlue !important;
     color: DarkSlateBlue !important;
@@ -376,42 +371,6 @@ select {
 select option {
     background-color: AliceBlue !important;
     color: DarkSlateBlue !important;
-}
-
-
-.testigo {
-    background-color: #f4f1e8; /* Color de papel antiguo */
-    color: #2c2c2c; /* Texto oscuro para buena legibilidad */
-    font-family: "Courier New", Courier, monospace; /* Tipo máquina de escribir */
-    font-size: 1.1em; /* Tamaño de texto moderado */
-    line-height: 1.6; /* Espaciado para lectura fácil */
-    padding: 15px; /* Espaciado interno */
-    border: 2px solid #444; /* Borde para simular un documento */
-    border-radius: 5px; /* Bordes ligeramente redondeados */
-    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-    max-width: 600px; /* Ancho máximo para mantener formato */
-    margin: 20px auto; /* Centrado */
-    text-align: justify; /* Alineación justificada */
-    white-space: pre-line; /* Respeta saltos de línea */
-}
-
-.anotacion {
-    background-color: #faf3e0; /* Fondo similar a papel envejecido */
-    color: darkred; /* Rojo oscuro para una apariencia más seria */
-    font-family: "Patrick Hand", cursive; /* Fuente manuscrita */
-    font-size: 1.1em; /* Tamaño similar al testigo */
-    font-style: italic; /* Estilo manuscrito */
-    line-height: 1.5; /* Espaciado adecuado */
-    padding: 10px 15px; /* Espaciado interno */
-    border-left: 4px solid darkred; /* Barra lateral simulando subrayado */
-    max-width: 550px; /* Un poco más estrecho para diferenciarlo */
-    margin: 20px auto; /* Centrado horizontal */
-    text-align: left; /* Alineación más informal */
-    white-space: pre-line; /* Respeta saltos de línea */
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.15); /* Sombra ligera */
-    transform: rotate(-2deg); /* Ligera inclinación para dar un toque más natural */
-    display: block; /* Asegura que se comporte como un bloque */
-    padding: 10px;
 }
 
 /* ---- Botones de imagen -------------------------------------------------
@@ -460,26 +419,6 @@ select option {
     background-image: url('assets/informacion_btn.png');
 }
 
-.boton {
-  border-radius: 5px;
-  background-color: green;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-
-  display: inline-block;
-  padding: 0px 10px;
-  margin: 0px auto;
-  font-size: 0.9em; 
-
-  text-align: center;
-  line-height: 1.2;
-
-  transition: all 0.2s ease;
-}
-
-.boton:hover {
-  transform: scale(1.04);     /* ↓ casi imperceptible pero presente */
-  cursor: pointer;
-}
 hr {
   width: 80%;
   height: 3px;
@@ -506,7 +445,6 @@ meter {
   display: block !important;
   border-radius: 10px !important;
 }
-
 
 /* Aplica estilos generales a todos los textbox */
 input[type="text"] {
@@ -566,44 +504,8 @@ textarea:hover {
     font-weight: 300;
 }
 
-
-button.macro-button {
-    font-size: 1.4em;          /* Tamaño del texto más grande */
-    font-weight: bold;         /* Texto en negritas */
-    color: white;              /* Color de la letra */
-    background-color: #0077cc; /* Color de fondo */
-    border: none;              /* Sin borde */
-    border-radius: 10px;       /* Bordes redondeados */
-    padding: 12px 20px;        /* Espaciado interno */
-    cursor: pointer;           /* Mano al pasar el mouse */
-    transition: background-color 0.3s, transform 0.2s; /* Animación */
-}
-
-button.macro-button:hover {
-    background-color: #005fa3; /* Color más oscuro al pasar mouse */
-    transform: scale(1.05);    /* Ligeramente más grande */
-}
-
 tw-passage > p:has(meter) {
     margin: 0 !important;
-}
-
-.lista-enunciados {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75em 1.5em;       /* espacio vertical y horizontal */
-}
-
-.enunciado-item {
-  flex: 1 1 45%;          /* dos columnas en pantallas anchas */
-  box-sizing: border-box;
-  min-width: 300px;       /* evita columnas demasiado angostas */
-}
-
-@media (max-width: 768px) {
-  .enunciado-item {
-    flex: 1 1 100%;
-  }
 }
 
 #bad-ending-overlay {
@@ -622,7 +524,6 @@ tw-passage > p:has(meter) {
 #bad-ending-overlay.fade-out {
   opacity: 0;
 }
-
 
 #PapelesAire {
   display: block;
@@ -2359,78 +2260,6 @@ body[data-tags~="fondoRojo"]::before {
     }
 }
 
-/* =========================
-   CAJA: INSTRUCCIONES
-   ========================= */
-.instrucciones {
-    background-color: rgba(255, 255, 255, 0.85); /* blanco claro translúcido */
-    color: DarkSlateBlue;
-    border-left: 5px solid #b0c4de; /* LightSteelBlue */
-    border-radius: 10px;
-    padding: 15px 18px;
-    margin: 20px auto;
-    max-width: 100%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    font-size: 1.05em;
-    line-height: 1.4;
-    transition: all 0.25s ease;
-}
-
-/* Hover sutil */
-.instrucciones:hover {
-    background-color: rgba(255, 255, 255, 0.95);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-
-/* =========================
-   CAJA: RETROALIMENTACIÓN
-   ========================= */
-
-.retroalimentacion-terminal {
-    background: linear-gradient(180deg, #f5f5f5, #eaeaea);
-    color: #333;
-    font-family: "Courier New", Courier, monospace;
-    font-size: 1.05em;
-    line-height: 1.5;
-    padding: 14px 18px 7px 28px;
-    margin: 20px auto;
-    max-width: 100%;
-    border: 1px solid #d0d0d0;
-    border-left: 5px solid #9a9a9a;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    position: relative;
-    white-space: pre-line;
-   text-align: center;
-}
-
-
-/* Cursor tipo consola */
-.retroalimentacion-terminal::before {
-    content: ">";
-    position: absolute;
-    left: 10px;
-    top: 14px;
-    color: #555;
-    font-weight: bold;
-    animation: parpadeo 5s steps(1) infinite;
-}
-
-/* Animación de parpadeo */
-@keyframes parpadeo {
-    0%, 50%, 100% { opacity: 1; }
-    25%, 75% { opacity: 0; }
-}
-
-/* Hover sutil */
-.retroalimentacion-terminal:hover {
-    background: linear-gradient(180deg, #fafafa, #e6e6e6);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-    transform: translateY(-1px);
-}
-
 .ellipsis {
     font-weight: 900;                  /* más grueso que bold */
     color: #8b0000;                   /* rojo oscuro consistente */
@@ -3179,8 +3008,7 @@ window.contarCorrectas = function () {
         return filas;
     }
 
-    /* true si la seleccion no sirve: numeros repetidos o incompleta. El maximo
-       llega por argumento; estas funciones no tocan el estado de SugarCube. */
+    /* true si la selección no sirve: números repetidos o incompleta. El máximo llega por argumento; estas funciones no tocan el estado de SugarCube. */
     window.revisarLinea = function (max) {
         var filas = seleccion();
         var usados = [];
