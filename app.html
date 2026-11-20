@@ -2529,9 +2529,20 @@ $(document).on("keydown", function (e) {
 });
 
 
-window.playConfettiOnce = function (passageName) {
-  if (!State.variables.confettiPlayed[passageName]) {
+/* Animación de éxito (Lottie).  */
+var EXITO_DURACION = 5000;   /* ms visibles antes de retirarla */
+var EXITO_DESVANECER = 400;  /* ms del desvanecido final */
+var EXITO_PANTALLA_CHICA = 600; /* px: lado corto de la pantalla por debajo del cual se aligera */
+var EXITO_CAPAS_PESADAS = ["MIDGARD1.svg"];
+var exitoListo = importScripts("assets/anim/lottie.min.js", "assets/anim/verifacto_anim.js");
 
+window.playConfettiOnce = function (passageName) {
+  if (State.variables.confettiPlayed[passageName]) {
+    return;
+  }
+  State.variables.confettiPlayed[passageName] = true;
+
+  exitoListo.then(function () {
     var overlay = document.createElement("div");
     overlay.id = "confetti-overlay";
     overlay.style.position = "fixed";
@@ -2539,32 +2550,54 @@ window.playConfettiOnce = function (passageName) {
     overlay.style.left = "0";
     overlay.style.width = "100vw";
     overlay.style.height = "100vh";
-    overlay.style.display = "flex";
-    overlay.style.alignItems = "center";
-    overlay.style.justifyContent = "center";
     overlay.style.pointerEvents = "none";
     overlay.style.zIndex = "99999";
-
-    var img = document.createElement("img");
-    img.src = "https://www.enacif.unam.mx/wp-content/uploads/2026/01/confeti_verifacto.gif";
-
-    /* Escalado responsive real */
-    img.style.width = "100vw";
-    img.style.height = "100vh";
-    img.style.objectFit = "contain";   // no se deforma
-    img.style.maxWidth = "100%";
-    img.style.maxHeight = "100%";
-
-    overlay.appendChild(img);
+    overlay.style.transition = "opacity " + EXITO_DESVANECER + "ms ease";
     document.body.appendChild(overlay);
 
-    State.variables.confettiPlayed[passageName] = true;
+    var ancho = window.innerWidth;
+    var alto = window.innerHeight;
 
-    /* Retiro automático */
+    /* copia nueva en cada reproducción: lottie modifica el objeto que recibe */
+    var datos = JSON.parse(JSON.stringify(window.VERIFACTO_ANIM));
+
+    /* Pantallas chicas (teléfonos, en cualquier orientación): se quita la capa
+       más pesada para que cargue y se mueva con fluidez. También se quitan
+       sus imágenes de la lista, así lottie ni siquiera las descarga. */
+    if (Math.min(ancho, alto) < EXITO_PANTALLA_CHICA) {
+      datos.layers = datos.layers.filter(function (capa) {
+        return EXITO_CAPAS_PESADAS.indexOf(capa.nm) === -1;
+      });
+      var usadas = datos.layers.map(function (capa) { return capa.refId; });
+      datos.assets = datos.assets.filter(function (img) {
+        return usadas.indexOf(img.id) !== -1;
+      });
+    }
+
+    var anim = lottie.loadAnimation({
+      container: overlay,
+      renderer: "svg",
+      loop: false,
+      autoplay: true,
+      animationData: datos,
+      rendererSettings: {
+        /* Vertical: cubre toda la pantalla (recorta los lados).
+           Horizontal: cabe completa, como el GIF anterior. */
+        preserveAspectRatio: alto > ancho ? "xMidYMid slice" : "xMidYMid meet"
+      }
+    });
+
+    /* Retiro automático: se corta a los 5 s con un desvanecido */
     setTimeout(function () {
-      overlay.remove();
-    }, 3000);
-  }
+      overlay.style.opacity = "0";
+      setTimeout(function () {
+        anim.destroy();
+        overlay.remove();
+      }, EXITO_DESVANECER);
+    }, EXITO_DURACION - EXITO_DESVANECER);
+  }).catch(function (err) {
+    console.error("No se pudo cargar la animación de éxito:", err);
+  });
 };
 
 
